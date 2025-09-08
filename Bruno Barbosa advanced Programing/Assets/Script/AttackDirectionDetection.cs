@@ -12,10 +12,14 @@ public class AttackDirectionDetection : MonoBehaviour
     [SerializeField] private float MouseMinimumMovement;
     [SerializeField] private Image CurrentIconDirection;
 
-    // Start is called before the first frame update
+    // Known issues
+    // Right now its kinda finicky
+    // You can run out of screen to attack 
+
+
     void Start()
     {
-       
+
         oldMousePosition = MousePosition;
     }
 
@@ -26,6 +30,8 @@ public class AttackDirectionDetection : MonoBehaviour
         
         getMouseLocation();
     }
+
+
 
     private void getMouseLocation()
     {
