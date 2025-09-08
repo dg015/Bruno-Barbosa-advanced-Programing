@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class AttackDirectionDetection : MonoBehaviour
 {
-    [SerializeField] private Image[] image;
+    [SerializeField] private Image[] images;
     [SerializeField] private Vector2 oldMousePosition;
     [SerializeField] private Vector2 MousePosition;
     [SerializeField] private Vector2 directionRaw;
     [SerializeField] private float directionAngle;
     [SerializeField] private float MouseMinimumMovement;
+    [SerializeField] private Image CurrentIconDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -65,21 +66,48 @@ public class AttackDirectionDetection : MonoBehaviour
 
     private void AssignAngleToAttack()
     {
-        if (directionAngle > 60 && directionAngle <= 120 )
+        if (directionAngle > 60 && directionAngle <= 120)
+        {
+            CurrentIconDirection = images[1];
             Debug.Log("up");
-        else if (directionAngle >-25 && directionAngle <= 25)
+        }
+        else if (directionAngle > -30 && directionAngle <= 30)
+        {
+            CurrentIconDirection = images[2];
             Debug.Log("right");
+        }
         else if (directionAngle > 150 || directionAngle <= -150)
+        {
+            CurrentIconDirection = images[3];
             Debug.Log("left");
-        else if (directionAngle >-70 && directionAngle <= -25 )
+        }
+        else if (directionAngle > -90 && directionAngle <= -30)
+        {
+            CurrentIconDirection = images[4];
             Debug.Log("down right");
-        else if (directionAngle > -155 && directionAngle <= -110)
-            Debug.Log("down left ");
-
+        }
+        else if (directionAngle > -120 && directionAngle <= -90)
+        {
+            CurrentIconDirection = images[5];
+            Debug.Log("down left");
+        }
+        updateUI();
     }
 
     private void updateUI()
     {
+       for(int i = 0; i < images.Length; i++)
+        {
+            if (images[i] == CurrentIconDirection )
+            {
+                images[i].GetComponent<Image>().color = Color.red;
+            }
+            else
+            {
+                images[i].GetComponent<Image>().color = Color.white;
+            }
+
+        }
 
     }
 
