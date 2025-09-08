@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class AttackDirectionDetection : MonoBehaviour
 {
     [SerializeField] private Image[] image;
@@ -32,11 +31,20 @@ public class AttackDirectionDetection : MonoBehaviour
         // -------------------------Process to follow----------------------------
         //first get the new mouse location     -> done
         //set the center to 0.5( easier for math I think)   --> done
-        //later every frame set the past position as the last location     
-        //if the mouse has moved get location between past location and new location
+        //later every frame set the past position as the last location     --> done
+        //if the mouse has moved get location between past location and new location --> done
         //compare location to angles to get the named direction ( up, left, right, down left, down right)
         //Paint the equivalent UI element red and set the previous one as white
         //--------------------------End of idea process --------------------------
+
+        //------------Angles to direction ------------
+        //Up     60 -> 120
+        //Right   -30 -> 30
+        //Left      150 -> -150
+        //Down right   -60 -> -30
+        //Down left    -120 - 60
+        //------------Angles to direction ------------
+
 
         //check if the mouse hasnt moved AND if the mouse has moved enough to trigger the effect
         if (MousePosition != oldMousePosition &&  (MousePosition - oldMousePosition).magnitude > MouseMinimumMovement)
@@ -45,14 +53,29 @@ public class AttackDirectionDetection : MonoBehaviour
             directionRaw = (MousePosition - oldMousePosition).normalized;
             //transform it into angles
             directionAngle = Mathf.Atan2(directionRaw.y, directionRaw.x) * Mathf.Rad2Deg;
-            
-            Debug.Log("mouse Moved");
+            AssignAngleToAttack();
+            //Debug.Log("mouse Moved");
         }
         else
         {
-            Debug.Log("mouse stayed");
+            //Debug.Log("mouse stayed");
         }
         oldMousePosition = MousePosition;
+    }
+
+    private void AssignAngleToAttack()
+    {
+        if (directionAngle > 60 && directionAngle <= 120 )
+            Debug.Log("up");
+        else if (directionAngle >-25 && directionAngle <= 25)
+            Debug.Log("right");
+        else if (directionAngle > 150 || directionAngle <= -150)
+            Debug.Log("left");
+        else if (directionAngle >-70 && directionAngle <= -25 )
+            Debug.Log("down right");
+        else if (directionAngle > -155 && directionAngle <= -110)
+            Debug.Log("down left ");
+
     }
 
     private void updateUI()
