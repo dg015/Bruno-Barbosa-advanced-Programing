@@ -7,7 +7,9 @@ public class AttackDirectionDetection : MonoBehaviour
 {
     [SerializeField] private Image[] image;
     [SerializeField] private Vector2 oldMousePosition;
-    [SerializeField] private Vector2 MousePosition; 
+    [SerializeField] private Vector2 MousePosition;
+    [SerializeField] private Vector2 directionRaw;
+    [SerializeField] private float directionAngle;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,11 @@ public class AttackDirectionDetection : MonoBehaviour
 
         if (MousePosition != oldMousePosition)
         {
+            //get the direction's vector
+            directionRaw = (MousePosition - oldMousePosition).normalized;
+            //transform it into angles
+            directionAngle = Mathf.Atan2(directionRaw.y, directionRaw.x) * Mathf.Rad2Deg;
+            
             oldMousePosition = MousePosition;
             Debug.Log("mouse Moved");
         }
