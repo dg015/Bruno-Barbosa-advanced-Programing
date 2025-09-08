@@ -10,6 +10,7 @@ public class AttackDirectionDetection : MonoBehaviour
     [SerializeField] private Vector2 MousePosition;
     [SerializeField] private Vector2 directionRaw;
     [SerializeField] private float directionAngle;
+    [SerializeField] private float MouseMinimumMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class AttackDirectionDetection : MonoBehaviour
     void Update()
     {
         MousePosition = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
+        
         getMouseLocation();
     }
 
@@ -36,29 +38,21 @@ public class AttackDirectionDetection : MonoBehaviour
         //Paint the equivalent UI element red and set the previous one as white
         //--------------------------End of idea process --------------------------
 
-
-        // set the starting mouse location to 0 (center)
-        Vector2 startingMouseLocation = new Vector2 (0,0);
-        //get the mouse lcoation
-        Vector2 mouseLocation = Input.mousePosition;
-        // get the center to 0.5 for easier math
-
-        if (MousePosition != oldMousePosition)
+        //check if the mouse hasnt moved AND if the mouse has moved enough to trigger the effect
+        if (MousePosition != oldMousePosition &&  (MousePosition - oldMousePosition).magnitude > MouseMinimumMovement)
         {
             //get the direction's vector
             directionRaw = (MousePosition - oldMousePosition).normalized;
             //transform it into angles
             directionAngle = Mathf.Atan2(directionRaw.y, directionRaw.x) * Mathf.Rad2Deg;
             
-            oldMousePosition = MousePosition;
             Debug.Log("mouse Moved");
         }
         else
         {
             Debug.Log("mouse stayed");
-            oldMousePosition = MousePosition;
         }
-        
+        oldMousePosition = MousePosition;
     }
 
     private void updateUI()
