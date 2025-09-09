@@ -29,6 +29,7 @@ public class AttackDirectionDetection : MonoBehaviour
         MousePosition = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
         
         getMouseLocation();
+        Cursor.visible = false;
     }
 
 
@@ -42,6 +43,10 @@ public class AttackDirectionDetection : MonoBehaviour
         //if the mouse has moved get location between past location and new location --> done
         //compare location to angles to get the named direction ( up, left, right, down left, down right)
         //Paint the equivalent UI element red and set the previous one as white
+
+        //todo
+        //use Input.getAxis instead of using the mouse position
+
         //--------------------------End of idea process --------------------------
 
         //------------Angles to direction ------------
