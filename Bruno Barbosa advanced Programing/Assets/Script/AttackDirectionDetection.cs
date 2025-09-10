@@ -5,8 +5,10 @@ using UnityEngine.UI;
 public class AttackDirectionDetection : MonoBehaviour
 {
     [SerializeField] private Image[] images;
+
     [SerializeField] private Vector2 oldMousePosition;
     [SerializeField] private Vector2 MousePosition;
+
     [SerializeField] private Vector2 directionRaw;
     [SerializeField] private float directionAngle;
     [SerializeField] private float MouseMinimumMovement;
@@ -19,7 +21,6 @@ public class AttackDirectionDetection : MonoBehaviour
 
     void Start()
     {
-
         oldMousePosition = MousePosition;
     }
 
@@ -28,36 +29,37 @@ public class AttackDirectionDetection : MonoBehaviour
     {
         MousePosition = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
         
-        getMouseLocation();
+        GetMouseLocation();
         Cursor.visible = false;
     }
 
+    /// <summary>
+    /// -------------------------Process to follow----------------------------
+    ///first get the new mouse location     -> done
+    ///set the center to 0.5( easier for math I think)   --> done
+    ///later every frame set the past position as the last location     --> done
+    ///if the mouse has moved get location between past location and new location --> done
+    ///compare location to angles to get the named direction ( up, left, right, down left, down right)
+    ///Paint the equivalent UI element red and set the previous one as white
+    ///
+    ///todo
+    ///use Input.getAxis instead of using the mouse position
+    ///
+    ///--------------------------End of idea process --------------------------
+    ///
+    ///------------Angles to direction ------------
+    ///Up     60 -> 120
+    ///Right   -30 -> 30
+    ///Left      150 -> -150
+    ///Down right   -60 -> -30
+    ///Down left    -120 - 60
+    ///------------Angles to direction ----------
+    /// </summary>
+    
 
-
-    private void getMouseLocation()
+    
+    private void GetMouseLocation()
     {
-        // -------------------------Process to follow----------------------------
-        //first get the new mouse location     -> done
-        //set the center to 0.5( easier for math I think)   --> done
-        //later every frame set the past position as the last location     --> done
-        //if the mouse has moved get location between past location and new location --> done
-        //compare location to angles to get the named direction ( up, left, right, down left, down right)
-        //Paint the equivalent UI element red and set the previous one as white
-
-        //todo
-        //use Input.getAxis instead of using the mouse position
-
-        //--------------------------End of idea process --------------------------
-
-        //------------Angles to direction ------------
-        //Up     60 -> 120
-        //Right   -30 -> 30
-        //Left      150 -> -150
-        //Down right   -60 -> -30
-        //Down left    -120 - 60
-        //------------Angles to direction ------------
-
-
         //check if the mouse hasnt moved AND if the mouse has moved enough to trigger the effect
         if (MousePosition != oldMousePosition &&  (MousePosition - oldMousePosition).magnitude > MouseMinimumMovement)
         {
@@ -77,6 +79,7 @@ public class AttackDirectionDetection : MonoBehaviour
 
     private void AssignAngleToAttack()
     {
+        //remvove the hard coded angles
         if (directionAngle > 60 && directionAngle <= 120)
         {
             CurrentIconDirection = images[1];
@@ -102,10 +105,10 @@ public class AttackDirectionDetection : MonoBehaviour
             CurrentIconDirection = images[5];
             Debug.Log("down left");
         }
-        updateUI();
+        UpdateUI();
     }
 
-    private void updateUI()
+    private void UpdateUI()
     {
        for(int i = 0; i < images.Length; i++)
         {
@@ -117,9 +120,6 @@ public class AttackDirectionDetection : MonoBehaviour
             {
                 images[i].GetComponent<Image>().color = Color.white;
             }
-
         }
-
     }
-
 }
