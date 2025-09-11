@@ -19,6 +19,7 @@ public class AttackDirectionDetection : MonoBehaviour
     [Header("attack destinguition")]
     [SerializeField] private float AttackTimer;
     [SerializeField] private float HeavyAttackTimerLimit;
+    [SerializeField] private bool isCombat = false;
 
     // Update is called once per frame
     private void Start()
@@ -31,22 +32,38 @@ public class AttackDirectionDetection : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+
+        startCombat();
+        if (startCombat())
         {
             UIElementsObject.SetActive(true);
             MousePosition = Input.mousePositionDelta;
             StartCoroutine(TestAttack());
             GetMouseLocation();
+
         }
 
 
 
     }
 
-    private void startCombat()
+    private bool startCombat()
     {
-
-
+        bool isCombat = true;
+        if (Input.GetKeyDown(KeyCode.Tab) && isCombat == false)
+        {
+            UIElementsObject.SetActive(true);
+            MousePosition = Input.mousePositionDelta;
+            StartCoroutine(TestAttack());
+            GetMouseLocation();
+            isCombat = true;
+            return true;
+        }
+        else
+        {
+            isCombat = false;
+            return false;
+        }
     }
 
 
