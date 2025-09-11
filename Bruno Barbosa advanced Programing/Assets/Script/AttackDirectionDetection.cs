@@ -8,6 +8,7 @@ public class AttackDirectionDetection : MonoBehaviour
     [Header("UI elements")]
     [SerializeField] private Image[] images;
     [SerializeField] private Image CurrentIconDirection;
+    [SerializeField] private GameObject UIElementsObject;
 
     [Header("Direction identification")]
     [SerializeField] private Vector2 MousePosition;    
@@ -20,18 +21,34 @@ public class AttackDirectionDetection : MonoBehaviour
     [SerializeField] private float HeavyAttackTimerLimit;
 
     // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        MousePosition = Input.mousePositionDelta;
-        StartCoroutine(TestAttack());
-        
-
-
-        GetMouseLocation();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        UIElementsObject.SetActive(false);
+
 
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            UIElementsObject.SetActive(true);
+            MousePosition = Input.mousePositionDelta;
+            StartCoroutine(TestAttack());
+            GetMouseLocation();
+        }
+
+
+
+    }
+
+    private void startCombat()
+    {
+
+
+    }
+
 
     /// <summary>
     /// -------------------------Process to follow----------------------------
