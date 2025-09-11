@@ -27,10 +27,18 @@ public class AttackDirectionDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MousePosition = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
-        
+        //old version of the input
+        //MousePosition = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
+
+        // new version
+
+        MousePosition = Input.mousePositionDelta;
+
+
         GetMouseLocation();
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     /// <summary>
@@ -55,16 +63,16 @@ public class AttackDirectionDetection : MonoBehaviour
     ///Down left    -120 - 60
     ///------------Angles to direction ----------
     /// </summary>
-    
 
-    
+
+
     private void GetMouseLocation()
     {
         //check if the mouse hasnt moved AND if the mouse has moved enough to trigger the effect
-        if (MousePosition != oldMousePosition &&  (MousePosition - oldMousePosition).magnitude > MouseMinimumMovement)
+        if (MousePosition.magnitude > MouseMinimumMovement)
         {
             //get the direction's vector
-            directionRaw = (MousePosition - oldMousePosition).normalized;
+            directionRaw = MousePosition.normalized;
             //transform it into angles
             directionAngle = Mathf.Atan2(directionRaw.y, directionRaw.x) * Mathf.Rad2Deg;
             AssignAngleToAttack();
@@ -74,7 +82,7 @@ public class AttackDirectionDetection : MonoBehaviour
         {
             //Debug.Log("mouse stayed");
         }
-        oldMousePosition = MousePosition;
+        //oldMousePosition = MousePosition;
     }
 
     private void AssignAngleToAttack()
