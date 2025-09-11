@@ -88,10 +88,12 @@ public class AttackDirectionDetection : MonoBehaviour
 
     private IEnumerator TestAttack()
     {
+        //as long as the mosue is being held increment timer
         if (Input.GetMouseButton(0))
         {
             AttackTimer += Time.deltaTime;
         }
+        //check if the player has let go of the button to stop timer and check how long they spent holding the button
         if (Input.GetMouseButtonUp(0))
         {
             if (AttackTimer >= HeavyAttackTimerLimit)
@@ -109,6 +111,7 @@ public class AttackDirectionDetection : MonoBehaviour
         }
         
     }
+
 
     /*
     private void TestAttack()
