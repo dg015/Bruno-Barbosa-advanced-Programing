@@ -1,40 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 public class AttackDirectionDetection : MonoBehaviour
 {
+    [Header("UI elements")]
     [SerializeField] private Image[] images;
+    [SerializeField] private Image CurrentIconDirection;
 
-    [SerializeField] private Vector2 oldMousePosition;
-    [SerializeField] private Vector2 MousePosition;
-
+    [Header("Direction identification")]
+    [SerializeField] private Vector2 MousePosition;    
     [SerializeField] private Vector2 directionRaw;
     [SerializeField] private float directionAngle;
     [SerializeField] private float MouseMinimumMovement;
-    [SerializeField] private Image CurrentIconDirection;
 
-    // Known issues
-    // Right now its kinda finicky
-    // You can run out of screen to attack 
-
-
-    void Start()
-    {
-        oldMousePosition = MousePosition;
-    }
+    [Header("attack destinguition")]
+    [SerializeField] private float AttackTimer;
+    [SerializeField] private float HeavyAttackTimerLimit;
 
     // Update is called once per frame
     void Update()
     {
-        //old version of the input
-        //MousePosition = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
-
-        // new version
-
         MousePosition = Input.mousePositionDelta;
-
+        StartCoroutine(TestAttack());
         
+
 
         GetMouseLocation();
         Cursor.visible = false;
@@ -69,8 +60,6 @@ public class AttackDirectionDetection : MonoBehaviour
     ///------------Angles to direction ----------
     /// </summary>
 
-
-
     private void GetMouseLocation()
     {
         //check if the mouse hasnt moved AND if the mouse has moved enough to trigger the effect
@@ -83,12 +72,66 @@ public class AttackDirectionDetection : MonoBehaviour
             AssignAngleToAttack();
             //Debug.Log("mouse Moved");
         }
-        else
-        {
-            //Debug.Log("mouse stayed");
-        }
-        //oldMousePosition = MousePosition;
     }
+
+    /// <summary>
+    /// Ideas for testing the simple vs heavy attack
+    /// First one
+    /// The moment it identifies the button is being held down start a timer
+    ///     if the button is released before the expected heavy attack timer then do an simple attack
+    ///     else if the button is held past the heavy attack timer trigger a heavy attack
+    ///     
+    /// Idea: Make this into a coroutine so it first takes the timer and later asigns how much time they spent with the button to its attack
+    /// </summary>
+    /// 
+
+
+    private IEnumerator TestAttack()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            AttackTimer += Time.deltaTime;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (AttackTimer >= HeavyAttackTimerLimit)
+            {
+                Debug.Log("heavyAttack");
+                AttackTimer = 0;
+                yield return null;
+            }
+            else
+            {
+                Debug.Log("simpleAttack");
+                AttackTimer = 0;
+                yield return null;
+            }
+        }
+        
+    }
+
+    /*
+    private void TestAttack()
+    {
+        //start increment timer
+        AttackTimer += Time.deltaTime;
+        if( AttackTimer >= HeavyAttackTimerLimit )
+        {
+            Debug.Log("heavyAttack");
+            AttackTimer = 0;
+        }
+        
+        else if( AttackTimer <= HeavyAttackTimerLimit ) 
+        {
+
+            Debug.Log("simpleAttack");
+            AttackTimer = 0;
+        }
+        
+       
+    }
+    */
+
 
     private void AssignAngleToAttack()
     {
