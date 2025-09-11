@@ -34,6 +34,7 @@ public class AttackDirectionDetection : MonoBehaviour
 
         MousePosition = Input.mousePositionDelta;
 
+        
 
         GetMouseLocation();
         Cursor.visible = false;
@@ -61,6 +62,10 @@ public class AttackDirectionDetection : MonoBehaviour
     ///Left      150 -> -150
     ///Down right   -60 -> -30
     ///Down left    -120 - 60
+    /// --------------------------- attacking---------------------
+    /// For attacking 
+    /// When just clicking will do the attack and no chance of changing input
+    /// If held will charge the attack and and will allow to change the input right before attack
     ///------------Angles to direction ----------
     /// </summary>
 
