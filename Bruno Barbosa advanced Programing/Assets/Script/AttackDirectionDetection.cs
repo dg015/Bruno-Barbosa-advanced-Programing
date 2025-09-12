@@ -32,37 +32,36 @@ public class AttackDirectionDetection : MonoBehaviour
     }
     void Update()
     {
-
         startCombat();
-        if (startCombat())
+        if (isCombat)
         {
+            Debug.Log("Opening UI");
             UIElementsObject.SetActive(true);
             MousePosition = Input.mousePositionDelta;
             StartCoroutine(TestAttack());
             GetMouseLocation();
 
         }
-
+        else if(!isCombat)
+        {
+            Debug.Log("Closing UI");
+            UIElementsObject.SetActive(false);
+        }
 
 
     }
 
-    private bool startCombat()
+    private void startCombat()
     {
-        bool isCombat = true;
+        
         if (Input.GetKeyDown(KeyCode.Tab) && isCombat == false)
         {
-            UIElementsObject.SetActive(true);
-            MousePosition = Input.mousePositionDelta;
-            StartCoroutine(TestAttack());
-            GetMouseLocation();
             isCombat = true;
-            return true;
+            
         }
-        else
+        else if (Input.GetKeyDown(KeyCode.Tab) && isCombat == true)
         {
             isCombat = false;
-            return false;
         }
     }
 
@@ -176,27 +175,27 @@ public class AttackDirectionDetection : MonoBehaviour
         if (directionAngle > 60 && directionAngle <= 120)
         {
             CurrentIconDirection = images[1];
-            Debug.Log("up");
+            //Debug.Log("up");
         }
         else if (directionAngle > -30 && directionAngle <= 30)
         {
             CurrentIconDirection = images[2];
-            Debug.Log("right");
+            //Debug.Log("right");
         }
         else if (directionAngle > 150 || directionAngle <= -150)
         {
             CurrentIconDirection = images[3];
-            Debug.Log("left");
+            //Debug.Log("left");
         }
         else if (directionAngle > -90 && directionAngle <= -30)
         {
             CurrentIconDirection = images[4];
-            Debug.Log("down right");
+            //Debug.Log("down right");
         }
         else if (directionAngle > -120 && directionAngle <= -90)
         {
             CurrentIconDirection = images[5];
-            Debug.Log("down left");
+            //Debug.Log("down left");
         }
         UpdateUI();
     }
