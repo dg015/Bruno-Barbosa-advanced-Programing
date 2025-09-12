@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class AttackDirectionDetection : MonoBehaviour
 {
     [Header("UI elements")]
+    [SerializeField] private Transform UIIconsGroup;
     [SerializeField] private Image[] images;
     [SerializeField] private Image CurrentIconDirection;
     [SerializeField] private GameObject UIElementsObject;
+    [SerializeField] private Camera cam;
 
     [Header("Direction identification")]
     [SerializeField] private Vector2 MousePosition;    
@@ -21,20 +25,36 @@ public class AttackDirectionDetection : MonoBehaviour
     [SerializeField] private float HeavyAttackTimerLimit;
     [SerializeField] private bool isCombat = false;
 
+    [Header("Enemy detection")]
+    [SerializeField] private bool enemiesNear;
+    [SerializeField] private float radius;
+    [SerializeField] private LayerMask EnemyLayer;
+    [SerializeField] private float maxdistance;
+    [SerializeField] private GameObject closestEnemy;
+
+    static RaycastHit[] hit = new RaycastHit[128];
+
+
+    
     // Update is called once per frame
     private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         UIElementsObject.SetActive(false);
-
-
     }
     void Update()
     {
+
+        
+     
+        searchForEnemies();
         startCombat();
-        if (isCombat)
+        if (isCombat && enemiesNear)
         {
+            Vector3 screenPos = cam.WorldToScreenPoint(closestEnemy.transform.position);
+            UIIconsGroup.position = screenPos;
+
             Debug.Log("Opening UI");
             UIElementsObject.SetActive(true);
             MousePosition = Input.mousePositionDelta;
@@ -53,7 +73,6 @@ public class AttackDirectionDetection : MonoBehaviour
 
     private void startCombat()
     {
-        
         if (Input.GetKeyDown(KeyCode.Tab) && isCombat == false)
         {
             isCombat = true;
@@ -118,6 +137,31 @@ public class AttackDirectionDetection : MonoBehaviour
     /// </summary>
     /// 
 
+    private void searchForEnemies()
+    {
+        int hits = Physics.SphereCastNonAlloc(transform.position, radius, transform.forward, hit, maxdistance, EnemyLayer);
+        if(hits > 0)
+        {
+            float ClosestDistance = Mathf.Infinity; 
+            enemiesNear = true;
+            Debug.Log("enemy in radius");
+            for (int i = 0; i < hits; i++)
+            {
+               float distance = Vector3.Distance(hit[i].collider.transform.position, transform.position);
+                if (ClosestDistance > distance)
+                {
+                    ClosestDistance = distance;
+                    closestEnemy = hit[i].collider.gameObject;
+                }
+            }
+        }
+        else
+        {
+            enemiesNear = false;
+        }
+
+            
+    }
 
     private IEnumerator TestAttack()
     {
@@ -146,27 +190,30 @@ public class AttackDirectionDetection : MonoBehaviour
     }
 
 
-    /*
-    private void TestAttack()
+    private void OnDrawGizmos()
     {
-        //start increment timer
-        AttackTimer += Time.deltaTime;
-        if( AttackTimer >= HeavyAttackTimerLimit )
-        {
-            Debug.Log("heavyAttack");
-            AttackTimer = 0;
-        }
-        
-        else if( AttackTimer <= HeavyAttackTimerLimit ) 
-        {
+        // Draw the starting sphere (at player position)
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radius);
 
-            Debug.Log("simpleAttack");
-            AttackTimer = 0;
-        }
+        // Draw the ending sphere at the max distance along forward
+        Vector3 endPosition = transform.position + transform.forward * maxdistance;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(endPosition, radius);
+
+        // Draw a line connecting the start and end spheres to visualize sweep
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(transform.position, endPosition);
+
         
-       
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position, radius, transform.forward, out hit, maxdistance, EnemyLayer))
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, hit.point);
+            Gizmos.DrawWireSphere(hit.point, radius * 0.5f); // visualize hit point
+        }
     }
-    */
 
 
     private void AssignAngleToAttack()
@@ -174,27 +221,27 @@ public class AttackDirectionDetection : MonoBehaviour
         //remvove the hard coded angles
         if (directionAngle > 60 && directionAngle <= 120)
         {
-            CurrentIconDirection = images[1];
+            CurrentIconDirection = images[0];
             //Debug.Log("up");
         }
         else if (directionAngle > -30 && directionAngle <= 30)
         {
-            CurrentIconDirection = images[2];
+            CurrentIconDirection = images[1];
             //Debug.Log("right");
         }
         else if (directionAngle > 150 || directionAngle <= -150)
         {
-            CurrentIconDirection = images[3];
+            CurrentIconDirection = images[2];
             //Debug.Log("left");
         }
         else if (directionAngle > -90 && directionAngle <= -30)
         {
-            CurrentIconDirection = images[4];
+            CurrentIconDirection = images[3];
             //Debug.Log("down right");
         }
         else if (directionAngle > -120 && directionAngle <= -90)
         {
-            CurrentIconDirection = images[5];
+            CurrentIconDirection = images[4];
             //Debug.Log("down left");
         }
         UpdateUI();
@@ -202,6 +249,7 @@ public class AttackDirectionDetection : MonoBehaviour
 
     private void UpdateUI()
     {
+       
        for(int i = 0; i < images.Length; i++)
         {
             if (images[i] == CurrentIconDirection )
