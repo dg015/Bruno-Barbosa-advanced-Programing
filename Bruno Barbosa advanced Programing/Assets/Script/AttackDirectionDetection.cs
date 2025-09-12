@@ -45,9 +45,6 @@ public class AttackDirectionDetection : MonoBehaviour
     }
     void Update()
     {
-
-        
-     
         searchForEnemies();
         startCombat();
         if (isCombat && enemiesNear)
@@ -55,7 +52,7 @@ public class AttackDirectionDetection : MonoBehaviour
             Vector3 screenPos = cam.WorldToScreenPoint(closestEnemy.transform.position);
             UIIconsGroup.position = screenPos;
 
-            Debug.Log("Opening UI");
+            
             UIElementsObject.SetActive(true);
             MousePosition = Input.mousePositionDelta;
             StartCoroutine(TestAttack());
@@ -64,7 +61,7 @@ public class AttackDirectionDetection : MonoBehaviour
         }
         else if(!isCombat)
         {
-            Debug.Log("Closing UI");
+            
             UIElementsObject.SetActive(false);
         }
 
@@ -144,7 +141,7 @@ public class AttackDirectionDetection : MonoBehaviour
         {
             float ClosestDistance = Mathf.Infinity; 
             enemiesNear = true;
-            Debug.Log("enemy in radius");
+            
             for (int i = 0; i < hits; i++)
             {
                float distance = Vector3.Distance(hit[i].collider.transform.position, transform.position);
