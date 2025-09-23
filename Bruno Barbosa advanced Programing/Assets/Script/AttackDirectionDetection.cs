@@ -34,6 +34,9 @@ public class AttackDirectionDetection : MonoBehaviour
 
     static RaycastHit[] hit = new RaycastHit[128];
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
 
     
     // Update is called once per frame
@@ -172,12 +175,14 @@ public class AttackDirectionDetection : MonoBehaviour
         {
             if (AttackTimer >= HeavyAttackTimerLimit)
             {
+                animator.SetTrigger("LeftAttack");//for now using the same left attack for everything
                 Debug.Log("heavyAttack");
                 AttackTimer = 0;
                 yield return null;
             }
             else
             {
+                animator.SetTrigger("LeftAttack");//for now using the same left attack for everything
                 Debug.Log("simpleAttack");
                 AttackTimer = 0;
                 yield return null;
