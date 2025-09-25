@@ -307,7 +307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &428127564
 Transform:
   m_ObjectHideFlags: 0
@@ -820,9 +820,9 @@ GameObject:
   m_Component:
   - component: {fileID: 902375226}
   - component: {fileID: 902375225}
-  - component: {fileID: 902375227}
   - component: {fileID: 902375229}
   - component: {fileID: 902375228}
+  - component: {fileID: 902375230}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -885,33 +885,6 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 166.956, z: 0}
---- !u!54 &902375227
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902375224}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 1
 --- !u!143 &902375228
 CharacterController:
   m_ObjectHideFlags: 0
@@ -949,8 +922,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bf08784ab9d5848a7622afbd405bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  orientation: {fileID: 0}
+  characterController: {fileID: 902375228}
+  speed: 12
+--- !u!136 &902375230
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902375224}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &940371595 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5183279880744255467, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
