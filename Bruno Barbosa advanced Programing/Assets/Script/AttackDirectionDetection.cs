@@ -39,7 +39,6 @@ public class AttackDirectionDetection : MonoBehaviour
 
 
     
-    // Update is called once per frame
     private void Start()
     {
         Cursor.visible = false;
@@ -122,20 +121,9 @@ public class AttackDirectionDetection : MonoBehaviour
             //transform it into angles
             directionAngle = Mathf.Atan2(directionRaw.y, directionRaw.x) * Mathf.Rad2Deg;
             AssignAngleToAttack();
-            //Debug.Log("mouse Moved");
+            
         }
     }
-
-    /// <summary>
-    /// Ideas for testing the simple vs heavy attack
-    /// First one
-    /// The moment it identifies the button is being held down start a timer
-    ///     if the button is released before the expected heavy attack timer then do an simple attack
-    ///     else if the button is held past the heavy attack timer trigger a heavy attack
-    ///     
-    /// Idea: Make this into a coroutine so it first takes the timer and later asigns how much time they spent with the button to its attack
-    /// </summary>
-    /// 
 
     private void searchForEnemies()
     {
@@ -159,8 +147,6 @@ public class AttackDirectionDetection : MonoBehaviour
         {
             enemiesNear = false;
         }
-
-            
     }
 
     private IEnumerator TestAttack()
@@ -191,6 +177,11 @@ public class AttackDirectionDetection : MonoBehaviour
         
     }
 
+
+    private void ProceduralAnimationHandler()
+    {
+
+    }
 
     private void OnDrawGizmos()
     {
@@ -251,7 +242,6 @@ public class AttackDirectionDetection : MonoBehaviour
 
     private void UpdateUI()
     {
-       
        for(int i = 0; i < images.Length; i++)
         {
             if (images[i] == CurrentIconDirection )
