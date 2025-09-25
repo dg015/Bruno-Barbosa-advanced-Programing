@@ -852,21 +852,49 @@ MonoBehaviour:
   CurrentIconDirection: {fileID: 0}
   UIElementsObject: {fileID: 691255371}
   cam: {fileID: 963194227}
-  MousePosition: {x: 0, y: 0}
-  directionRaw: {x: 0, y: 0}
-  directionAngle: 0
   MouseMinimumMovement: 10
   AttackTimer: 0
   HeavyAttackTimerLimit: 1
-  isCombat: 0
-  enemiesNear: 0
   radius: 5
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 64
   maxdistance: 10
-  closestEnemy: {fileID: 0}
   animator: {fileID: 1582914079}
+  attackWeight:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0012303591
+      inSlope: 2.0017684
+      outSlope: 2.0017684
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1.0021145
+      inSlope: -0.0013504028
+      outSlope: -0.0013504028
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9999858
+      value: -0.000091552734
+      inSlope: -2.0044692
+      outSlope: -2.0044692
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  LeftArmAnimation: {fileID: 2073747541}
 --- !u!4 &902375226
 Transform:
   m_ObjectHideFlags: 0

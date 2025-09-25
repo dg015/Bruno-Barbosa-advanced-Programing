@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
 public class AttackDirectionDetection : MonoBehaviour
 {
@@ -15,28 +16,29 @@ public class AttackDirectionDetection : MonoBehaviour
     [SerializeField] private Camera cam;
 
     [Header("Direction identification")]
-    [SerializeField] private Vector2 MousePosition;    
-    [SerializeField] private Vector2 directionRaw;
-    [SerializeField] private float directionAngle;
+    private Vector2 MousePosition;    
+    private Vector2 directionRaw;
+    private float directionAngle;
     [SerializeField] private float MouseMinimumMovement;
 
     [Header("attack destinguition")]
     [SerializeField] private float AttackTimer;
     [SerializeField] private float HeavyAttackTimerLimit;
-    [SerializeField] private bool isCombat = false;
+    private bool isCombat = false;
 
     [Header("Enemy detection")]
-    [SerializeField] private bool enemiesNear;
+    private bool enemiesNear;
     [SerializeField] private float radius;
     [SerializeField] private LayerMask EnemyLayer;
     [SerializeField] private float maxdistance;
-    [SerializeField] private GameObject closestEnemy;
+    private GameObject closestEnemy;
 
     static RaycastHit[] hit = new RaycastHit[128];
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
-
+    [SerializeField] private AnimationCurve attackWeightCurve;
+    [SerializeField] TwoBoneIKConstraint LeftArmAnimation;
 
     
     private void Start()
@@ -162,6 +164,13 @@ public class AttackDirectionDetection : MonoBehaviour
             if (AttackTimer >= HeavyAttackTimerLimit)
             {
                 animator.SetTrigger("LeftAttack");//for now using the same left attack for everything
+                //LeftArmAnimation.weight = attackWeightCurve;
+                /*
+                AnimatorClipInfo[] animationDuration = animator.GetCurrentAnimatorClipInfo(0);
+                string clipLenght = animationDuration[0].clip.name;
+                Debug.Log(clipLenght);
+                */
+
                 Debug.Log("heavyAttack");
                 AttackTimer = 0;
                 yield return null;
