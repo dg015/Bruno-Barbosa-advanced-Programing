@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -39,8 +40,10 @@ public class AttackDirectionDetection : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private AnimationCurve attackWeightCurve;
     [SerializeField] TwoBoneIKConstraint LeftArmAnimation;
+    [SerializeField] private float sphereCastRadius;
+    [SerializeField] private GameObject animationTarget;
+    [SerializeField] private Transform animationTargetRestingPosition;
 
-    
     private void Start()
     {
         Cursor.visible = false;
@@ -51,8 +54,10 @@ public class AttackDirectionDetection : MonoBehaviour
     {
         searchForEnemies();
         startCombat();
+
         if (isCombat && enemiesNear)
         {
+            checkForCloseEnemies(transform.position,sphereCastRadius, EnemyLayer);
             Vector3 screenPos = cam.WorldToScreenPoint(closestEnemy.transform.position);
             UIIconsGroup.position = screenPos;
 
@@ -151,6 +156,34 @@ public class AttackDirectionDetection : MonoBehaviour
         }
     }
 
+
+    private void checkForCloseEnemies(Vector3 center, float radius, LayerMask enemy)
+    {
+        //create sphere to check for coliders
+        Collider[] hitColliders = Physics.OverlapSphere(center, radius, enemy);
+        //run through the array
+        if (hitColliders.Length > 0)
+        {
+            Debug.Log("enemy Nearby");
+            if(animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunch"))
+            {
+                //if the animation is playing
+                animationTarget.transform.position = hitColliders[0].gameObject.transform.position;
+                AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+                //Debug.Log(animator.GetCurrentAnimatorStateInfo(0) + "," + animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
+                LeftArmAnimation.weight = attackWeightCurve.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
+            }
+        }
+        else
+        {
+            animationTarget.transform.position = animationTargetRestingPosition.position;
+        }
+    }
+
+
+
     private IEnumerator TestAttack()
     {
         //as long as the mosue is being held increment timer
@@ -161,15 +194,11 @@ public class AttackDirectionDetection : MonoBehaviour
         //check if the player has let go of the button to stop timer and check how long they spent holding the button
         if (Input.GetMouseButtonUp(0))
         {
+           
             if (AttackTimer >= HeavyAttackTimerLimit)
             {
                 animator.SetTrigger("LeftAttack");//for now using the same left attack for everything
-                //LeftArmAnimation.weight = attackWeightCurve;
-                /*
-                AnimatorClipInfo[] animationDuration = animator.GetCurrentAnimatorClipInfo(0);
-                string clipLenght = animationDuration[0].clip.name;
-                Debug.Log(clipLenght);
-                */
+                
 
                 Debug.Log("heavyAttack");
                 AttackTimer = 0;
@@ -178,19 +207,18 @@ public class AttackDirectionDetection : MonoBehaviour
             else
             {
                 animator.SetTrigger("LeftAttack");//for now using the same left attack for everything
+                
+
                 Debug.Log("simpleAttack");
                 AttackTimer = 0;
                 yield return null;
+               
             }
         }
         
     }
 
 
-    private void ProceduralAnimationHandler()
-    {
-
-    }
 
     private void OnDrawGizmos()
     {
