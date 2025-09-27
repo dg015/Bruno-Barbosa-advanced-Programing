@@ -52,12 +52,12 @@ public class AttackDirectionDetection : MonoBehaviour
     }
     void Update()
     {
-        searchForEnemies();
+        //searchForEnemies();
         startCombat();
-
+        checkForCloseEnemies(transform.position, sphereCastRadius, EnemyLayer);
         if (isCombat && enemiesNear)
         {
-            checkForCloseEnemies(transform.position,sphereCastRadius, EnemyLayer);
+            
             Vector3 screenPos = cam.WorldToScreenPoint(closestEnemy.transform.position);
             UIIconsGroup.position = screenPos;
 
@@ -157,15 +157,33 @@ public class AttackDirectionDetection : MonoBehaviour
     }
 
 
+
+
     private void checkForCloseEnemies(Vector3 center, float radius, LayerMask enemy)
     {
         //create sphere to check for coliders
         Collider[] hitColliders = Physics.OverlapSphere(center, radius, enemy);
+
+
+
         //run through the array
         if (hitColliders.Length > 0)
         {
-            Debug.Log("enemy Nearby");
-            if(animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunch"))
+            float ClosestDistance = Mathf.Infinity;
+            enemiesNear = true;
+
+            for (int i = 0; i < hitColliders.Length; i++)
+            {
+                float distance = Vector3.Distance(hitColliders[i].transform.position, transform.position);
+
+                if (ClosestDistance > distance)
+                {
+                    ClosestDistance = distance;
+                    closestEnemy = hitColliders[i].gameObject;
+                }
+            }
+
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunch"))
             {
                 //if the animation is playing
                 animationTarget.transform.position = hitColliders[0].gameObject.transform.position;
@@ -178,6 +196,7 @@ public class AttackDirectionDetection : MonoBehaviour
         }
         else
         {
+            enemiesNear = false;
             animationTarget.transform.position = animationTargetRestingPosition.position;
         }
     }
