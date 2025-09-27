@@ -16,11 +16,14 @@ public class AttackDirectionDetection : MonoBehaviour
     [SerializeField] private GameObject UIElementsObject;
     [SerializeField] private Camera cam;
 
+
+
     [Header("Direction identification")]
     private Vector2 MousePosition;    
     private Vector2 directionRaw;
     private float directionAngle;
     [SerializeField] private float MouseMinimumMovement;
+    [SerializeField] private string currentAttackAngle;
 
     [Header("attack destinguition")]
     [SerializeField] private float AttackTimer;
@@ -32,7 +35,7 @@ public class AttackDirectionDetection : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private LayerMask EnemyLayer;
     [SerializeField] private float maxdistance;
-    private GameObject closestEnemy;
+    [SerializeField] private GameObject closestEnemy;
 
     static RaycastHit[] hit = new RaycastHit[128];
 
@@ -164,8 +167,6 @@ public class AttackDirectionDetection : MonoBehaviour
         //create sphere to check for coliders
         Collider[] hitColliders = Physics.OverlapSphere(center, radius, enemy);
 
-
-
         //run through the array
         if (hitColliders.Length > 0)
         {
@@ -186,9 +187,11 @@ public class AttackDirectionDetection : MonoBehaviour
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunch"))
             {
                 //if the animation is playing
-                animationTarget.transform.position = hitColliders[0].gameObject.transform.position;
+
+                //animationTarget.transform.position = hitColliders[0].gameObject.transform.position;
+                //animationTarget.transform.position = closestEnemy.transform.Find("Head").GetComponent<Transform>().position;
                 AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
-                //Debug.Log(animator.GetCurrentAnimatorStateInfo(0) + "," + animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+                
 
                 LeftArmAnimation.weight = attackWeightCurve.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
@@ -200,6 +203,46 @@ public class AttackDirectionDetection : MonoBehaviour
             animationTarget.transform.position = animationTargetRestingPosition.position;
         }
     }
+
+
+    private void proceduralAnimationManager()
+    {
+        switch (currentAttackAngle)
+        {
+            case "up":
+                //play correct animation for now Im using left punch
+                animator.SetTrigger("LeftAttack");
+                //set attack location
+                animationTarget.transform.position = closestEnemy.transform.Find("Head").GetComponent<Transform>().position;
+                break;
+            case "right":
+                //play correct animation for now Im using left punch
+                animator.SetTrigger("LeftAttack");
+                //set attack location
+                animationTarget.transform.position = closestEnemy.transform.position;
+                break;
+            case "left":
+                //play correct animation for now Im using left punch
+                animator.SetTrigger("LeftAttack");
+                //set attack location
+                animationTarget.transform.position = closestEnemy.transform.position;
+                break;
+            case "down right":
+                //play correct animation for now Im using left punch
+                animator.SetTrigger("LeftAttack");
+                //set attack location
+                animationTarget.transform.position = closestEnemy.transform.Find("Gut Left").GetComponent<Transform>().position;
+                break;
+            case "down left":
+                //play correct animation for now Im using left punch
+                animator.SetTrigger("LeftAttack");
+                //set attack location
+                animationTarget.transform.position = closestEnemy.transform.Find("Gut Right").GetComponent<Transform>().position;
+                break;
+        }
+
+    }
+
 
 
 
@@ -216,8 +259,9 @@ public class AttackDirectionDetection : MonoBehaviour
            
             if (AttackTimer >= HeavyAttackTimerLimit)
             {
-                animator.SetTrigger("LeftAttack");//for now using the same left attack for everything
-                
+                proceduralAnimationManager();//for now using the same left attack for everything
+
+
 
                 Debug.Log("heavyAttack");
                 AttackTimer = 0;
@@ -225,7 +269,7 @@ public class AttackDirectionDetection : MonoBehaviour
             }
             else
             {
-                animator.SetTrigger("LeftAttack");//for now using the same left attack for everything
+                proceduralAnimationManager();//for now using the same left attack for everything
                 
 
                 Debug.Log("simpleAttack");
@@ -271,26 +315,31 @@ public class AttackDirectionDetection : MonoBehaviour
         if (directionAngle > 60 && directionAngle <= 120)
         {
             CurrentIconDirection = images[0];
+            currentAttackAngle = "up";
             //Debug.Log("up");
         }
         else if (directionAngle > -30 && directionAngle <= 30)
         {
             CurrentIconDirection = images[1];
+            currentAttackAngle = "right";
             //Debug.Log("right");
         }
         else if (directionAngle > 150 || directionAngle <= -150)
         {
             CurrentIconDirection = images[2];
+            currentAttackAngle = "left";
             //Debug.Log("left");
         }
         else if (directionAngle > -90 && directionAngle <= -30)
         {
             CurrentIconDirection = images[3];
+            currentAttackAngle = "down right";
             //Debug.Log("down right");
         }
         else if (directionAngle > -120 && directionAngle <= -90)
         {
             CurrentIconDirection = images[4];
+            currentAttackAngle = "down left";
             //Debug.Log("down left");
         }
         UpdateUI();
