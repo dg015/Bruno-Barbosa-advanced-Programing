@@ -63,8 +63,6 @@ public class AttackDirectionDetection : MonoBehaviour
             
             Vector3 screenPos = cam.WorldToScreenPoint(closestEnemy.transform.position);
             UIIconsGroup.position = screenPos;
-
-            
             UIElementsObject.SetActive(true);
             MousePosition = Input.mousePositionDelta;
             StartCoroutine(TestAttack());
@@ -95,30 +93,12 @@ public class AttackDirectionDetection : MonoBehaviour
 
 
     /// <summary>
-    /// -------------------------Process to follow----------------------------
-    ///first get the new mouse location     -> done
-    ///set the center to 0.5( easier for math I think)   --> done
-    ///later every frame set the past position as the last location     --> done
-    ///if the mouse has moved get location between past location and new location --> done
-    ///compare location to angles to get the named direction ( up, left, right, down left, down right)
-    ///Paint the equivalent UI element red and set the previous one as white
-    ///
-    ///todo
-    ///use Input.getAxis instead of using the mouse position
-    ///
-    ///--------------------------End of idea process --------------------------
-    ///
     ///------------Angles to direction ------------
     ///Up     60 -> 120
     ///Right   -30 -> 30
     ///Left      150 -> -150
     ///Down right   -60 -> -30
     ///Down left    -120 - 60
-    /// --------------------------- attacking---------------------
-    /// For attacking 
-    /// When just clicking will do the attack and no chance of changing input
-    /// If held will charge the attack and and will allow to change the input right before attack
-    ///------------Angles to direction ----------
     /// </summary>
 
     private void GetMouseLocation()
@@ -135,6 +115,7 @@ public class AttackDirectionDetection : MonoBehaviour
         }
     }
 
+    /*
     private void searchForEnemies()
     {
         int hits = Physics.SphereCastNonAlloc(transform.position, radius, transform.forward, hit, maxdistance, EnemyLayer);
@@ -159,7 +140,7 @@ public class AttackDirectionDetection : MonoBehaviour
         }
     }
 
-
+    */
 
 
     private void checkForCloseEnemies(Vector3 center, float radius, LayerMask enemy)
@@ -244,8 +225,6 @@ public class AttackDirectionDetection : MonoBehaviour
     }
 
 
-
-
     private IEnumerator TestAttack()
     {
         //as long as the mosue is being held increment timer
@@ -260,9 +239,6 @@ public class AttackDirectionDetection : MonoBehaviour
             if (AttackTimer >= HeavyAttackTimerLimit)
             {
                 proceduralAnimationManager();//for now using the same left attack for everything
-
-
-
                 Debug.Log("heavyAttack");
                 AttackTimer = 0;
                 yield return null;
@@ -270,8 +246,6 @@ public class AttackDirectionDetection : MonoBehaviour
             else
             {
                 proceduralAnimationManager();//for now using the same left attack for everything
-                
-
                 Debug.Log("simpleAttack");
                 AttackTimer = 0;
                 yield return null;

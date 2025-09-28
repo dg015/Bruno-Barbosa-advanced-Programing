@@ -139,6 +139,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8279710979522887879, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
   m_PrefabInstance: {fileID: 987446455}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &155138178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 155138179}
+  m_Layer: 6
+  m_Name: Gut Left
+  m_TagString: GutLeft
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &155138179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155138178}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.2520001, y: -0.43599987, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1742840120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &164351376 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7417801912053145716, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -906,6 +937,7 @@ MonoBehaviour:
   UIElementsObject: {fileID: 691255371}
   cam: {fileID: 963194227}
   MouseMinimumMovement: 10
+  currentAttackAngle: 
   AttackTimer: 0
   HeavyAttackTimerLimit: 1
   radius: 5
@@ -913,6 +945,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxdistance: 10
+  closestEnemy: {fileID: 0}
   animator: {fileID: 1582914079}
   attackWeightCurve:
     serializedVersion: 2
@@ -1040,6 +1073,37 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &902976383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 902976384}
+  m_Layer: 6
+  m_Name: Gut Right
+  m_TagString: GutRight
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &902976384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902976383}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.176, y: -0.43599987, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1742840120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &903096091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6686643647145634331, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -1763,6 +1827,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3611028120302317323}
+  - {fileID: 2097271963}
+  - {fileID: 155138179}
+  - {fileID: 902976384}
   m_Father: {fileID: 543450652383747150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1742840121
@@ -3043,6 +3110,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8557203427919007493, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
   m_PrefabInstance: {fileID: 987446455}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2097271962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2097271963}
+  m_Layer: 6
+  m_Name: Head
+  m_TagString: Head
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2097271963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097271962}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2540002, z: 0.15600026}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1742840120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2138492592 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1260340113789838509, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
