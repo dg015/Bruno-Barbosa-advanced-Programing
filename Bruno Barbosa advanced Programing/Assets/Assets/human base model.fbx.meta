@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: metarig|Action
-      takeName: metarig|Action
+      name: metarig.001|Starting (1)
+      takeName: metarig.001|Starting
       internalID: -3584619823844665163
       firstFrame: 0
-      lastFrame: 0
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -60,11 +60,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: metarig|Action (1)
-      takeName: metarig|Action
+      name: metarig.001|Starting
+      takeName: metarig.001|Starting
       internalID: -5324238279805231817
       firstFrame: 0
-      lastFrame: 0
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -89,8 +89,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: metarig|LeftPunch
-      takeName: metarig|LeftPunch
+      name: metarig.001|LeftPunch
+      takeName: metarig.001|LeftPunch
       internalID: 4681902813065628061
       firstFrame: 0
       lastFrame: 18
@@ -147,8 +147,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: metarig|Idle
-      takeName: metarig|Idle
+      name: metarig.001|Idle
+      takeName: metarig.001|Idle
       internalID: -2463781497245029270
       firstFrame: 0
       lastFrame: 119
@@ -176,8 +176,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: metarig|Starting
-      takeName: metarig|Starting
+      name: metarig.001|Starting (2)
+      takeName: metarig.001|Starting
       internalID: 994142206340939124
       firstFrame: 0
       lastFrame: 17
