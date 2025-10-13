@@ -165,7 +165,7 @@ public class AttackDirectionDetection : MonoBehaviour
                 }
             }
 
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunch"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunch") || animator.GetAnimatorTransitionInfo(0).IsName("Idle -> LeftPunch"))
             {
                 //if the animation is playing
 
