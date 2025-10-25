@@ -151,15 +151,19 @@ public class AttackDirectionDetection : MonoBehaviour
         //run through the array
         if (hitColliders.Length > 0)
         {
+            
             float ClosestDistance = Mathf.Infinity;
             enemiesNear = true;
 
             for (int i = 0; i < hitColliders.Length; i++)
             {
+
                 float distance = Vector3.Distance(hitColliders[i].transform.position, transform.position);
 
+                
                 if (ClosestDistance > distance)
                 {
+                    
                     ClosestDistance = distance;
                     closestEnemy = hitColliders[i].gameObject;
                 }
@@ -167,6 +171,7 @@ public class AttackDirectionDetection : MonoBehaviour
 
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunch") || animator.GetAnimatorTransitionInfo(0).IsName("Idle -> LeftPunch"))
             {
+                Debug.Log("playing animation");
                 //if the animation is playing
 
                 //animationTarget.transform.position = hitColliders[0].gameObject.transform.position;
