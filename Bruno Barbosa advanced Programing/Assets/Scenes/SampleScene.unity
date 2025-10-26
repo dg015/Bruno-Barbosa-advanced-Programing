@@ -976,6 +976,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   playerTransform: {fileID: 1595052709}
+  currentPosition: {x: 0, y: 0, z: 0}
+  YOffset: 0
+  nextPosition: {x: 0, y: 0, z: 0}
+  stepDistance: 0
+  playerBody: {fileID: 0}
 --- !u!4 &519165573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1410196183796077265, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -1656,10 +1661,43 @@ MonoBehaviour:
   dodgeTimer: 0
   dodgeTimerMax: 0
   speed: 12
-  dodgeDuration: 5
-  dodgeHeight: -1.51
-  playerModel: {fileID: 1582914078}
-  interpolationRatio: 0.5
+  dodgeDuration: 1.5
+  dodgeDurationTimer: 0
+  dodging: 0
+  originalYValue: 0
+  dodgeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.4
+      outSlope: 1.4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.7
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.4
+      outSlope: -1.4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!136 &902375230
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1894,7 +1932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2253642204691711036, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3611028121608000686, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1972,6 +2010,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   playerTransform: {fileID: 1595052709}
+  currentPosition: {x: 0, y: 0, z: 0}
+  YOffset: 0
+  nextPosition: {x: 0, y: 0, z: 0}
+  stepDistance: 0
+  playerBody: {fileID: 0}
 --- !u!4 &1111758463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5187005011647837126, guid: 0da90dfe953257a448cda017108a8edb, type: 3}

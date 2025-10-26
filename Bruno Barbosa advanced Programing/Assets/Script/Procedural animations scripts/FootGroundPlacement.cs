@@ -1,38 +1,65 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class FootGroundPlacement : MonoBehaviour
 {
+
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Transform playerTransform;
+
+    [Header("Raycast")]
+    [SerializeField] private float YOffset;
+    [SerializeField] private Transform playerModel;
+    [SerializeField] private float footspacing;
+
+    [Header("Location")]
+    [SerializeField] private Vector3 currentPosition;
+    [SerializeField] private Vector3 nextPosition;
+    [SerializeField] private float stepDistance;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        currentPosition = transform.position;
     }
     /// <summary>
-    /// BUG 
-    /// the feet location is only calculated when the body goes up, when going down it stops calculating
-    /// Fix: Make the raycast higher?
-    /// FIXED
-    /// new bug
-    /// Now the feet is being calculated exaclty where the head is, needs to do the spacing
-    /// FIXED
+    /// first set the player feet fixed in current position 
+    /// Check if the new player position is ground layer 
+    /// Check if the player has moved enough and if so then set the new locaiton as the target
+    /// 
     /// </summary>
     void Update()
     {
-        Vector3 calculatedFootPosition = new Vector3(transform.position.x, playerTransform.position.y, transform.position.z);
+        //set the position as the current position so feet i stuck in locaiton
+        transform.position = currentPosition;
+
+        //calculater a new location to have
+        Vector3 calculatedFootPosition = playerModel.position + (playerModel.right * footspacing) + Vector3.up * YOffset;
         RaycastHit hit;
         if(Physics.Raycast(calculatedFootPosition, Vector3.down,out hit,Mathf.Infinity, groundLayer))
         {
-            transform.position = hit.point;
-            Debug.Log(hit.ToString());
+            //set the new location for the closest
+            nextPosition = hit.point;
+
+            //if the closest location is far enough set it as the new location
+            if(Vector3.Distance(currentPosition, nextPosition) >= stepDistance)
+            {
+                currentPosition = nextPosition;
+                Debug.Log("new location found");
+            }
+            
         }
     }
     private void OnDrawGizmos()
     {
+        //raycast draw line not updating??
+        Vector3 calculatedFootPosition = playerModel.position + (playerModel.right * footspacing) + Vector3.up * YOffset;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position,Vector3.down);
+
+        Gizmos.DrawRay(calculatedFootPosition,Vector3.down);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(nextPosition, 5);
     }
 
 
