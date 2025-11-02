@@ -975,12 +975,46 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  playerTransform: {fileID: 1595052709}
+  YOffset: 1
+  playerModel: {fileID: 1582914078}
+  footspacing: 0.17
   currentPosition: {x: 0, y: 0, z: 0}
-  YOffset: 0
   nextPosition: {x: 0, y: 0, z: 0}
-  stepDistance: 0
-  playerBody: {fileID: 0}
+  stepDistance: 0.5
+  walkHeightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  targetAnimation: {x: 0, y: 0, z: 0}
 --- !u!4 &519165573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1410196183796077265, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -1755,8 +1789,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02, y: 0.02, z: 0.0593769}
-  m_Center: {x: 2.2456283e-18, y: 1.0688228e-18, z: 0.01204328}
+  m_Size: {x: 0.02, y: 0.02, z: 0.041415393}
+  m_Center: {x: 2.0661413e-19, y: 8.117718e-19, z: 0.021024032}
 --- !u!4 &959464270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1930877611542627142, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -1932,7 +1966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2253642204691711036, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3611028121608000686, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2009,12 +2043,46 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  playerTransform: {fileID: 1595052709}
+  YOffset: 1
+  playerModel: {fileID: 1582914078}
+  footspacing: -0.2
   currentPosition: {x: 0, y: 0, z: 0}
-  YOffset: 0
   nextPosition: {x: 0, y: 0, z: 0}
-  stepDistance: 0
-  playerBody: {fileID: 0}
+  stepDistance: 0.5
+  walkHeightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  targetAnimation: {x: 0, y: 0, z: 0}
 --- !u!4 &1111758463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5187005011647837126, guid: 0da90dfe953257a448cda017108a8edb, type: 3}

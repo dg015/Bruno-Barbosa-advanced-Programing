@@ -16,18 +16,18 @@ public class FootGroundPlacement : MonoBehaviour
     [SerializeField] private Vector3 nextPosition;
     [SerializeField] private float stepDistance;
 
+    [Header("Animation")]
+    [SerializeField] private AnimationCurve walkHeightCurve;
+    [SerializeField] private Vector3 targetAnimation;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentPosition = transform.position;
     }
-    /// <summary>
-    /// first set the player feet fixed in current position 
-    /// Check if the new player position is ground layer 
-    /// Check if the player has moved enough and if so then set the new locaiton as the target
-    /// 
-    /// </summary>
+
     void Update()
     {
         //set the position as the current position so feet i stuck in locaiton
@@ -36,20 +36,45 @@ public class FootGroundPlacement : MonoBehaviour
         //calculater a new location to have
         Vector3 calculatedFootPosition = playerModel.position + (playerModel.right * footspacing) + Vector3.up * YOffset;
         RaycastHit hit;
-        if(Physics.Raycast(calculatedFootPosition, Vector3.down,out hit,Mathf.Infinity, groundLayer))
+        moveFoot();
+        if (Physics.Raycast(calculatedFootPosition, Vector3.down,out hit,Mathf.Infinity, groundLayer))
         {
+
             //set the new location for the closest
             nextPosition = hit.point;
-
+            
             //if the closest location is far enough set it as the new location
-            if(Vector3.Distance(currentPosition, nextPosition) >= stepDistance)
+            if (Vector3.Distance(currentPosition, nextPosition) >= stepDistance)
             {
-                currentPosition = nextPosition;
+                
+                currentPosition = targetAnimation;
+                //currentPosition = nextPosition;
                 Debug.Log("new location found");
             }
             
         }
     }
+
+    /// <summary>
+    /// use either move towards or a timer
+    /// 
+    /// In this case it makes more sense to use a timer since it uses an animation curve
+    /// </summary>
+    private void moveFoot()
+    {
+        //D for distance and normalize into the distance
+        float totalStepDistance = Vector3.Distance(currentPosition, nextPosition);
+
+        //this will return the current position oof the feet, which in this case will be 0
+        float currentFeetDistance = Vector3.Distance(transform.position, currentPosition);
+
+        float d = Mathf.Clamp01(currentFeetDistance / totalStepDistance);
+
+        float newFootHeight = walkHeightCurve.Evaluate(d);
+        Debug.Log(newFootHeight);
+        targetAnimation = new Vector3 (transform.position.x,transform.position.y + newFootHeight, transform.position.z);
+    }
+
     private void OnDrawGizmos()
     {
         //raycast draw line not updating??
