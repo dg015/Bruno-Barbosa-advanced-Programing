@@ -71,7 +71,7 @@ public class FootGroundPlacement : MonoBehaviour
         float d = Mathf.Clamp01(currentFeetDistance / totalStepDistance);
 
         float newFootHeight = walkHeightCurve.Evaluate(d);
-        Debug.Log(newFootHeight);
+        //Debug.Log(newFootHeight);
         targetAnimation = new Vector3 (transform.position.x,transform.position.y + newFootHeight, transform.position.z);
     }
 
