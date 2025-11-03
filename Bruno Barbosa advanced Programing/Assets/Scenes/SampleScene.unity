@@ -1627,7 +1627,6 @@ GameObject:
   - component: {fileID: 902375225}
   - component: {fileID: 902375229}
   - component: {fileID: 902375232}
-  - component: {fileID: 902375228}
   - component: {fileID: 902375230}
   - component: {fileID: 902375231}
   m_Layer: 0
@@ -1734,31 +1733,6 @@ Transform:
   - {fileID: 428127564}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!143 &902375228
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902375224}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &902375229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1771,7 +1745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bf08784ab9d5848a7622afbd405bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 902375228}
+  characterController: {fileID: 0}
   dodgeTimer: 0
   dodgeTimerMax: 0
   speed: 12
@@ -1875,16 +1849,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 902375231}
+  playerCollider: {fileID: 0}
   deceleration: 1050
   decelerationStrengh: 5
   dragTime: 1
   acceleration: 950
-  maxSpeed: 20
-  currentSpeed: 0
+  currentMaxSpeed: 0
+  defaultMaxSpeed: 25
+  boostedMaxSpeed: 45
   camera: {fileID: 963194228}
   ground:
     serializedVersion: 2
     m_Bits: 128
+  dodgeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.4
+      outSlope: 1.4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.7
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.4
+      outSlope: -1.4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dodgeDuration: 1.5
+  defaultColliderHeight: 0
+  heightOffset: 0
+  lastPressedKey: 0
 --- !u!4 &918785166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2318583519064010648, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -1919,8 +1932,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02, y: 0.02, z: 0.041415393}
-  m_Center: {x: 2.0661413e-19, y: 8.117718e-19, z: 0.021024032}
+  m_Size: {x: 0.02, y: 0.02, z: 0.03444114}
+  m_Center: {x: -2.8053349e-18, y: 2.3214807e-18, z: 0.024511185}
 --- !u!4 &959464270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1930877611542627142, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
