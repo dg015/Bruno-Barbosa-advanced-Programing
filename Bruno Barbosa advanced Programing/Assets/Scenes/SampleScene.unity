@@ -1875,7 +1875,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 902375231}
-  Drag:
+  deceleration: 1050
+  decelerationStrengh: 5
+  dragTime: 1
+  acceleration: 950
+  maxSpeed: 20
+  maxSpeedCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -1899,11 +1904,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  deceleration: 1050
-  decelerationStrengh: 15
-  acceleration: 950
-  maxSpeed: 20
-  maxAccelForce: 0
+  speedBoostDuration: 1
+  speedBoostStrengh: 45
   currentSpeed: 0
   camera: {fileID: 963194228}
 --- !u!4 &918785166 stripped

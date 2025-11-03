@@ -7,14 +7,20 @@ public class RigidBodyCharacterController : MonoBehaviour
 
     [Header("Speed")]
     //decelerating using drag
-    [SerializeField] private AnimationCurve Drag;
+
     [SerializeField] protected float deceleration;
     [SerializeField] protected float decelerationStrengh;
+    [SerializeField] private float dragTime = 1f;
 
     //acelerating
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
-    [SerializeField] private float maxAccelForce;
+    //[SerializeField] private AnimationCurve maxSpeedCurve;
+    //[SerializeField] private float speedBoostDuration;
+    //[SerializeField] private float speedBoostStrengh;
+
+    
+    //speed boost while starting walking
 
     [SerializeField] private float currentSpeed;
 
@@ -81,6 +87,9 @@ public class RigidBodyCharacterController : MonoBehaviour
         //checking if theres any input from the player
         if(MoveDirection.magnitude > 0.01f)
         {
+            //float maxSpeedBoosted = maxSpeedCurve.Evaluate(speedBoostDuration) * speedBoostStrengh;
+            
+           // maxSpeed = maxSpeed + maxSpeedBoosted;
             rb.linearDamping = 0;
             currentSpeed += acceleration * Time.deltaTime;
             currentSpeed = Mathf.Min(currentSpeed, maxSpeed);
@@ -92,13 +101,10 @@ public class RigidBodyCharacterController : MonoBehaviour
             currentSpeed -=deceleration* Time.deltaTime;
             currentSpeed = Mathf.Max(currentSpeed, 0);
 
-            float newDrag = Mathf.Lerp(decelerationStrengh, 0, 1f * Time.deltaTime);
+            float newDrag = Mathf.Lerp(decelerationStrengh, 0, dragTime * Time.deltaTime);
 
             rb.linearDamping = newDrag;
             
         }
-        
-
     }
-
 }
