@@ -33,6 +33,10 @@ public class RigidBodyCharacterController : MonoBehaviour
     [SerializeField] private Transform camera;
 
 
+    [Header("Grounded")]
+    [SerializeField] private LayerMask ground;
+    bool grounded;
+
     Vector3 MoveDirection;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -54,6 +58,8 @@ public class RigidBodyCharacterController : MonoBehaviour
     {
         getCameraDireciton();
         getInput();
+        isGroundedCheck(grounded, 15f);
+        stopGravity(grounded);
        
     }
     private void FixedUpdate()
@@ -73,6 +79,32 @@ public class RigidBodyCharacterController : MonoBehaviour
         Vector3 rightRelative = horizontalInput * camRight;
 
         MoveDirection = fowardRelative + rightRelative;
+    }
+
+    private void isGroundedCheck(bool isGrounded, float rayCastDistance)
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, rayCastDistance, ground))
+        {
+            grounded = true;
+        }
+        else
+        {
+            grounded = false;
+        }
+    }
+
+
+    private void stopGravity(bool isGrounded)
+    {
+        if (grounded)
+        {
+            rb.useGravity = false;
+        }
+        else
+        {
+            rb.useGravity = true;
+        }
+
     }
 
 

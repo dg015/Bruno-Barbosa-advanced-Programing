@@ -1832,9 +1832,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2.5598485
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0, y: 0.7799243, z: -0}
 --- !u!54 &902375231
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1880,34 +1880,11 @@ MonoBehaviour:
   dragTime: 1
   acceleration: 950
   maxSpeed: 20
-  maxSpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  speedBoostDuration: 1
-  speedBoostStrengh: 45
   currentSpeed: 0
   camera: {fileID: 963194228}
+  ground:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!4 &918785166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2318583519064010648, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
