@@ -21,6 +21,7 @@ public class FootGroundPlacement : MonoBehaviour
     [SerializeField] private float lerp;
     [SerializeField] private float stepHeight;
     [SerializeField] private float stepSpeed;
+    [SerializeField] private float distanceModifier;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,20 +34,16 @@ public class FootGroundPlacement : MonoBehaviour
         //set the position as the current position so feet i stuck in locaiton
         transform.position = currentPosition;
 
-        //calculater a new location to have
-        Vector3 calculatedFootPosition = playerModel.position + (playerModel.right * footspacing) + Vector3.up * YOffset;
-        RaycastHit hit;
-        //moveFoot();
-        if (Physics.Raycast(calculatedFootPosition, Vector3.down,out hit,Mathf.Infinity, groundLayer))
+        Ray ray = new Ray(playerModel.position + (playerModel.right * footspacing), Vector3.down);
+        
+        if (Physics.Raycast(ray, out RaycastHit hit,10,groundLayer))
         {
-            //set the new location for the closest
-            //nextPosition = hit.point;
-            
             //if the closest location is far enough set it as the new location
             if (Vector3.Distance(nextPosition, hit.point) >= stepDistance)
             {
-                
+
                 lerp = 0;
+
                 nextPosition = hit.point;
                 //currentPosition = nextPosition;
                 Debug.Log("new location found");
@@ -65,7 +62,11 @@ public class FootGroundPlacement : MonoBehaviour
         {
             oldPosition = nextPosition;
         }
+
+        
     }
+
+    
 
     /// <summary>
     /// use either move towards or a timer
@@ -73,16 +74,15 @@ public class FootGroundPlacement : MonoBehaviour
     /// In this case it makes more sense to use a timer since it uses an animation curve
     /// </summary>
     
+
     private void OnDrawGizmos()
     {
-        //raycast draw line not updating??
-        Vector3 calculatedFootPosition = playerModel.position + (playerModel.right * footspacing) + Vector3.up * YOffset;
         Gizmos.color = Color.yellow;
-
-        Gizmos.DrawRay(calculatedFootPosition,Vector3.down);
+        Ray ray = new Ray(playerModel.position + (playerModel.right * footspacing), Vector3.down + new Vector3(0,15));
+        Gizmos.DrawRay(ray);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(nextPosition, 5);
+        Gizmos.DrawWireSphere(nextPosition, 0.5f);
     }
 
 

@@ -1057,41 +1057,11 @@ MonoBehaviour:
   footspacing: 0.17
   currentPosition: {x: 0, y: 0, z: 0}
   nextPosition: {x: 0, y: 0, z: 0}
-  stepDistance: 0.5
-  walkHeightCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2
-      outSlope: -2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  targetAnimation: {x: 0, y: 0, z: 0}
+  oldPosition: {x: 0, y: 0, z: 0}
+  stepDistance: 0.25
+  lerp: 0
+  stepHeight: 0.5
+  stepSpeed: 10
 --- !u!4 &519165573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1410196183796077265, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -1853,10 +1823,10 @@ MonoBehaviour:
   deceleration: 1050
   decelerationStrengh: 5
   dragTime: 1
-  acceleration: 950
+  acceleration: 120
   currentMaxSpeed: 0
-  defaultMaxSpeed: 25
-  boostedMaxSpeed: 45
+  defaultMaxSpeed: 150
+  boostedMaxSpeed: 200
   camera: {fileID: 963194228}
   ground:
     serializedVersion: 2
@@ -2190,41 +2160,11 @@ MonoBehaviour:
   footspacing: -0.2
   currentPosition: {x: 0, y: 0, z: 0}
   nextPosition: {x: 0, y: 0, z: 0}
-  stepDistance: 0.5
-  walkHeightCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2
-      outSlope: -2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  targetAnimation: {x: 0, y: 0, z: 0}
+  oldPosition: {x: 0, y: 0, z: 0}
+  stepDistance: 0.25
+  lerp: 0
+  stepHeight: 0.5
+  stepSpeed: 10
 --- !u!4 &1111758463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5187005011647837126, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
