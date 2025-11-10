@@ -1861,6 +1861,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 128
+  dodging: 0
   dodgeCurve:
     serializedVersion: 2
     m_Curve:
@@ -1896,7 +1897,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   dodgeDuration: 1.5
   defaultColliderHeight: 0
-  heightOffset: 0
+  dodgeForce: 15
   lastPressedKey: 0
 --- !u!4 &918785166 stripped
 Transform:

@@ -117,7 +117,10 @@ public class RigidBodyCharacterController : MonoBehaviour
 
         MultipleTapInput(KeyCode.D, 1f, 2);
         MultipleTapInput(KeyCode.A, 1f, 2);
-
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            dodging = true; 
+        }
     }
 
     private void FixedUpdate()
@@ -188,6 +191,7 @@ public class RigidBodyCharacterController : MonoBehaviour
 
 
         //applying force
+        /*
         if(lastPressedKey == KeyCode.A)
         {
             rb.AddForce(- transform.right,ForceMode.Impulse);
@@ -196,6 +200,7 @@ public class RigidBodyCharacterController : MonoBehaviour
         {
             rb.AddForce(transform.right, ForceMode.Impulse);
         }
+        */
         //when t is bigger then 1 that means the animation is over and the dodge is over
         if (t >= 1f)
         {

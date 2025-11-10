@@ -14,18 +14,18 @@ public class FootGroundPlacement : MonoBehaviour
     [Header("Location")]
     [SerializeField] private Vector3 currentPosition;
     [SerializeField] private Vector3 nextPosition;
+    [SerializeField] private Vector3 oldPosition;
     [SerializeField] private float stepDistance;
 
     [Header("Animation")]
-    [SerializeField] private AnimationCurve walkHeightCurve;
-    [SerializeField] private Vector3 targetAnimation;
-
-
+    [SerializeField] private float lerp;
+    [SerializeField] private float stepHeight;
+    [SerializeField] private float stepSpeed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentPosition = transform.position;
+        //currentPosition = transform.position;
     }
 
     void Update()
@@ -36,22 +36,34 @@ public class FootGroundPlacement : MonoBehaviour
         //calculater a new location to have
         Vector3 calculatedFootPosition = playerModel.position + (playerModel.right * footspacing) + Vector3.up * YOffset;
         RaycastHit hit;
-        moveFoot();
+        //moveFoot();
         if (Physics.Raycast(calculatedFootPosition, Vector3.down,out hit,Mathf.Infinity, groundLayer))
         {
-
             //set the new location for the closest
-            nextPosition = hit.point;
+            //nextPosition = hit.point;
             
             //if the closest location is far enough set it as the new location
-            if (Vector3.Distance(currentPosition, nextPosition) >= stepDistance)
+            if (Vector3.Distance(nextPosition, hit.point) >= stepDistance)
             {
                 
-                currentPosition = targetAnimation;
+                lerp = 0;
+                nextPosition = hit.point;
                 //currentPosition = nextPosition;
                 Debug.Log("new location found");
             }
             
+        }
+        if(lerp <1)
+        {
+            Vector3 footPosition = Vector3.Lerp(oldPosition, nextPosition,lerp);
+            footPosition.y += Mathf.Sin(lerp * Mathf.PI) * stepHeight;
+
+            currentPosition = footPosition;
+            lerp += Time.deltaTime * stepSpeed;
+        }
+        else
+        {
+            oldPosition = nextPosition;
         }
     }
 
@@ -60,21 +72,7 @@ public class FootGroundPlacement : MonoBehaviour
     /// 
     /// In this case it makes more sense to use a timer since it uses an animation curve
     /// </summary>
-    private void moveFoot()
-    {
-        //D for distance and normalize into the distance
-        float totalStepDistance = Vector3.Distance(currentPosition, nextPosition);
-
-        //this will return the current position oof the feet, which in this case will be 0
-        float currentFeetDistance = Vector3.Distance(transform.position, currentPosition);
-
-        float d = Mathf.Clamp01(currentFeetDistance / totalStepDistance);
-
-        float newFootHeight = walkHeightCurve.Evaluate(d);
-        //Debug.Log(newFootHeight);
-        targetAnimation = new Vector3 (transform.position.x,transform.position.y + newFootHeight, transform.position.z);
-    }
-
+    
     private void OnDrawGizmos()
     {
         //raycast draw line not updating??
