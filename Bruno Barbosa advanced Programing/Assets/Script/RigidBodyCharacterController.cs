@@ -142,7 +142,7 @@ public class RigidBodyCharacterController : MonoBehaviour
 
     void getCameraDireciton()
     {
-        Vector3 camFoward = camera.forward;
+        Vector3 camFoward = transform.forward;
         Vector3 camRight = camera.right;
 
         camFoward.y = 0;
@@ -152,6 +152,7 @@ public class RigidBodyCharacterController : MonoBehaviour
         Vector3 rightRelative = horizontalInput * camRight;
 
         MoveDirection = fowardRelative + rightRelative;
+        MoveDirection.Normalize();
     }
 
     private void isGroundedCheck(bool isGrounded, float rayCastDistance)
