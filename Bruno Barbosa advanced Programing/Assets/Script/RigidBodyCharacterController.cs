@@ -56,6 +56,10 @@ public class RigidBodyCharacterController : MonoBehaviour
     int keyPresses;
     float DodgeRunTime = 0;
     [SerializeField] private KeyCode lastPressedKey;
+
+
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -222,17 +226,28 @@ public class RigidBodyCharacterController : MonoBehaviour
     /// </summary>
     private void movePlayer()
     {
+        //getting these guys for clamping later
+        Vector3 velocity = rb.linearVelocity;
+        Vector3 horziontalVelocity = new Vector3(velocity.x, velocity.y, velocity.y);
+
         //checking if theres any input from the player
         if(MoveDirection.magnitude > 0.01f)
         {
-            //float maxSpeedBoosted = maxSpeedCurve.Evaluate(speedBoostDuration) * speedBoostStrengh;
-            
-           // maxSpeed = maxSpeed + maxSpeedBoosted;
+            //set the drag to 0 so the player can walk fine
             rb.linearDamping = 0;
-            currentSpeed += acceleration * Time.deltaTime;
-            currentSpeed = Mathf.Min(currentSpeed, currentMaxSpeed);
-            rb.AddForce(MoveDirection * currentSpeed, ForceMode.Force);
-            
+
+            //target velocity, I want them to reach their top speed
+            Vector3 targetVelocity = MoveDirection * currentMaxSpeed;
+
+            // the needed speed change to reach the desired speed in a frame
+            Vector3 neededAceleration = (targetVelocity - rb.linearVelocity / Time.fixedDeltaTime );
+
+            //clamp it so that the required speed is not too high
+            neededAceleration = Vector3.ClampMagnitude(neededAceleration, currentMaxSpeed);
+
+
+            rb.AddForce(Vector3.Scale(neededAceleration * rb.mass, new Vector3(1,1,1)));
+
         }
         else
         {
