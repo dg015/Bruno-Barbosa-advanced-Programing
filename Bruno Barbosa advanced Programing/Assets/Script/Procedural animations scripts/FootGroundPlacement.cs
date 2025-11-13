@@ -2,76 +2,76 @@ using UnityEngine;
 
 public class FootGroundPlacement : MonoBehaviour
 {
-
-    [SerializeField] private LayerMask groundLayer;
-
     [Header("Raycast")]
     [SerializeField] private float YOffset;
     [SerializeField] private Transform playerModel;
     [SerializeField] private float footspacing;
+    [SerializeField] private LayerMask groundLayer;
+
 
     [Header("Location")]
-    [SerializeField] private Vector3 currentPosition;
-    [SerializeField] private Vector3 nextPosition;
-    [SerializeField] private Vector3 oldPosition;
     [SerializeField] private float stepDistance;
+    [SerializeField] private float velocityPredictionMultiplier = 0.3f;
 
-    //[SerializeField] private Rigidbody rb;
-    //[SerializeField] private float rbVelocityMultiplier = 1f;
-    [SerializeField] private float velocityPredictionMultiplier = 1f;
+    private Vector3 currentPosition, nextPosition, oldPosition;
+
     private Vector3 lastPosition;
-    private Vector3 velocity;
+    [SerializeField] private Vector3 velocity;
 
-    //[SerializeField] private Vector3 offset;
 
     [Header("Animation")]
-    [SerializeField] private float lerp;
     [SerializeField] private float stepHeight;
     [SerializeField] private float stepSpeed;
     [SerializeField] private float distanceModifier;
+    private float lerp;
 
     [SerializeField] private FootGroundPlacement other;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private RigidBodyCharacterController characterController;
 
     public bool IsMoving => lerp < 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rb = GetComponentInParent<Rigidbody>();
+        characterController = GetComponentInParent<RigidBodyCharacterController>();
         currentPosition = transform.position;
         nextPosition = transform.position;
         lerp = 2f;
 
-        //offset = transform.position - playerModel.position;
     }
 
     void Update()
     {
+        moveLeg();
+        playerSpeedModifier();
+    }
+    private void moveLeg()
+    {
         //set the position as the current position so feet i stuck in locaiton
         transform.position = currentPosition;
 
-        //Vector3 placementOffset = playerModel.TransformVector(offset);
         Ray ray = new Ray(playerModel.position + (playerModel.right * footspacing) + Vector3.up * 2, Vector3.down);
-        //Ray ray = new Ray(playerModel.position + placementOffset, Vector3.down);
 
-        if (Physics.Raycast(ray, out RaycastHit hit,10,groundLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, 10, groundLayer))
         {
             //if the closest location is far enough set it as the new location
             if (Vector3.Distance(nextPosition, hit.point) >= stepDistance && !other.IsMoving && lerp >= 1f)
             {
+                Debug.Log(hit.collider);
                 lerp = 0f;
 
                 nextPosition = hit.point;
                 nextPosition += velocity * velocityPredictionMultiplier;
                 oldPosition = transform.position;
-                //nextPosition = hit.point + placementOffset;
-                //currentPosition = nextPosition;
                 Debug.Log("new location found");
             }
-            
+
         }
-        if(lerp < 1f)
+        if (lerp < 1f)
         {
-            Vector3 footPosition = Vector3.Lerp(oldPosition, nextPosition,lerp);
+            Vector3 footPosition = Vector3.Lerp(oldPosition, nextPosition, lerp);
             footPosition.y += Mathf.Sin(lerp * Mathf.PI) * stepHeight;
 
             currentPosition = footPosition;
@@ -82,18 +82,22 @@ public class FootGroundPlacement : MonoBehaviour
             //oldPosition = nextPosition;
         }
 
-        velocity = (playerModel.position - lastPosition) / Time.deltaTime;
-        lastPosition = playerModel.position;
+        
     }
 
-    
+    private void FixedUpdate()
+    {
+        velocity = (rb.position - lastPosition) / Time.deltaTime;
+        lastPosition = rb.position;
+    }
 
-    /// <summary>
-    /// use either move towards or a timer
-    /// 
-    /// In this case it makes more sense to use a timer since it uses an animation curve
-    /// </summary>
-    
+    private void playerSpeedModifier()
+    {
+        //distanceModifier = velocity.magnitude / characterController.defaultMaxSpeed;
+        distanceModifier = rb.linearVelocity.magnitude / characterController.defaultMaxSpeed;
+
+    }
+
 
     private void OnDrawGizmos()
     {

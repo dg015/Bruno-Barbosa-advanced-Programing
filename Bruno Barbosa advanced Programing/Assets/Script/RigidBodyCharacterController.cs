@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class RigidBodyCharacterController : MonoBehaviour
 {
@@ -14,17 +15,10 @@ public class RigidBodyCharacterController : MonoBehaviour
     [SerializeField] protected float decelerationStrengh;
     [SerializeField] private float dragTime = 1f;
 
-    //acelerating
     [SerializeField] private float acceleration;
     [SerializeField] private float currentMaxSpeed;
-    [SerializeField] private float defaultMaxSpeed;
+    [SerializeField] public float defaultMaxSpeed;
     [SerializeField] private float boostedMaxSpeed;
-    //[SerializeField] private AnimationCurve maxSpeedCurve;
-    //[SerializeField] private float speedBoostDuration;
-    //[SerializeField] private float speedBoostStrengh;
-
-    
-    //speed boost while starting walking
 
      private float currentSpeed;
 
@@ -49,10 +43,12 @@ public class RigidBodyCharacterController : MonoBehaviour
     private float originalYValue;
     [SerializeField] private AnimationCurve dodgeCurve;
     [SerializeField] private float dodgeDuration;
-    //changing the scale while doding
 
     [SerializeField] private float defaultColliderHeight;
     [SerializeField] private float dodgeForce;
+
+    [SerializeField] private OverrideTransform hipBone;
+    //Dodge trigger
     int keyPresses;
     float DodgeRunTime = 0;
     [SerializeField] private KeyCode lastPressedKey;
@@ -96,7 +92,7 @@ public class RigidBodyCharacterController : MonoBehaviour
             //for now i call the action here but later make it so I can just pass it as a method
             dodging = true;
             dodgeDurationTimer = 0f;
-            Debug.Log("action Started");
+            //I Debug.Log("action Started");
             keyPresses = 0;
             DodgeRunTime = 0;
         }
@@ -104,7 +100,7 @@ public class RigidBodyCharacterController : MonoBehaviour
         {
             keyPresses = 0;
             DodgeRunTime = 0;
-            Debug.Log("time ran out");
+           // Debug.Log("time ran out");
         }
         
        
@@ -189,8 +185,11 @@ public class RigidBodyCharacterController : MonoBehaviour
 
         //lower the Y value using the curve
         float newY = dodgeCurve.Evaluate(t);
-        transform.position = new Vector3(transform.position.x, originalYValue - newY, transform.position.z);
+
        
+        hipBone.data.position = new Vector3(0, -newY, 0);
+
+
         //reduce player height to not cause clipping with the ground
         playerCollider.height = defaultColliderHeight - newY;
 
@@ -241,10 +240,10 @@ public class RigidBodyCharacterController : MonoBehaviour
             Vector3 targetVelocity = MoveDirection * currentMaxSpeed;
 
             // the needed speed change to reach the desired speed in a frame
-            Vector3 neededAceleration = (targetVelocity - rb.linearVelocity / Time.fixedDeltaTime );
+            Vector3 neededAceleration = ((targetVelocity - rb.linearVelocity) / Time.fixedDeltaTime );
 
             //clamp it so that the required speed is not too high
-            neededAceleration = Vector3.ClampMagnitude(neededAceleration, currentMaxSpeed);
+            neededAceleration = Vector3.ClampMagnitude(neededAceleration, acceleration);
 
 
             rb.AddForce(Vector3.Scale(neededAceleration * rb.mass, new Vector3(1,1,1)));

@@ -19,7 +19,7 @@ public class PlayerCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         transform.position = cameraHolder.position;
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
@@ -37,4 +37,6 @@ public class PlayerCamera : MonoBehaviour
 
 
     }
+
+
 }
