@@ -1051,9 +1051,12 @@ MonoBehaviour:
   stepHeight: 0.5
   stepSpeed: 6
   distanceModifier: 0
+  lerp: 0
   other: {fileID: 1057733081}
   rb: {fileID: 902375231}
   characterController: {fileID: 0}
+  hipBone: {fileID: 1464774664}
+  hipAnimationModifier: 0.05
 --- !u!4 &519165573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1410196183796077265, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -2133,9 +2136,12 @@ MonoBehaviour:
   stepHeight: 0.5
   stepSpeed: 6
   distanceModifier: 0
+  lerp: 0
   other: {fileID: 492145023}
   rb: {fileID: 902375231}
   characterController: {fileID: 0}
+  hipBone: {fileID: 1464774664}
+  hipAnimationModifier: 0.05
 --- !u!4 &1111758463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5187005011647837126, guid: 0da90dfe953257a448cda017108a8edb, type: 3}

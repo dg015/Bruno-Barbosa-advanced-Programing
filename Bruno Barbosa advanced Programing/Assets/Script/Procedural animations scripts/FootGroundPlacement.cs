@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class FootGroundPlacement : MonoBehaviour
 {
@@ -23,13 +24,20 @@ public class FootGroundPlacement : MonoBehaviour
     [SerializeField] private float stepHeight;
     [SerializeField] private float stepSpeed;
     [SerializeField] private float distanceModifier;
-    private float lerp;
+    [SerializeField] private float lerp;
 
     [SerializeField] private FootGroundPlacement other;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private RigidBodyCharacterController characterController;
 
+    [Header("Hip Movement")]
+    [SerializeField] private OverrideTransform hipBone;
+    [SerializeField] private float hipAnimationModifier;
+
     public bool IsMoving => lerp < 1f;
+
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,6 +54,7 @@ public class FootGroundPlacement : MonoBehaviour
     {
         moveLeg();
         playerSpeedModifier();
+        hipMovement();
     }
     private void moveLeg()
     {
@@ -69,7 +78,7 @@ public class FootGroundPlacement : MonoBehaviour
             }
 
         }
-        if (lerp < 1f)
+        if (lerp <= 1f)
         {
             Vector3 footPosition = Vector3.Lerp(oldPosition, nextPosition, lerp);
             footPosition.y += Mathf.Sin(lerp * Mathf.PI) * stepHeight;
@@ -83,6 +92,15 @@ public class FootGroundPlacement : MonoBehaviour
         }
 
         
+    }
+
+
+    private void hipMovement()
+    {
+
+        //float newY = Mathf.Lerp(0, walkHipAnimationY, lerp);
+        float newY = Mathf.Sin(lerp * Mathf.PI) * hipAnimationModifier;
+        hipBone.data.position = new Vector3(0, -newY, 0);
     }
 
     private void FixedUpdate()

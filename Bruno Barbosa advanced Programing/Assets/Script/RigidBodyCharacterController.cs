@@ -102,8 +102,6 @@ public class RigidBodyCharacterController : MonoBehaviour
             DodgeRunTime = 0;
            // Debug.Log("time ran out");
         }
-        
-       
     }
 
     // Update is called once per frame
