@@ -5,29 +5,34 @@ public class PunchHandler : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float rayDistance;
     [SerializeField] private LayerMask playerMask;
+    [SerializeField] public bool punching;
+    [SerializeField] private Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        //punching = false;
+        animator = GetComponentInParent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        punching(rayDistance, playerMask);
+
+            
     }
 
-    private void punching(float raycatDistace,LayerMask layer)
+    public void punch()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if(Physics.Raycast(transform.position,transform.forward,out RaycastHit hit, rayDistance, playerMask))
         {
-            Physics.Raycast(transform.position,transform.forward,out RaycastHit hit,raycatDistace,layer);
-            {
-                Debug.Log("hit player");
-            }
+            Debug.Log(hit.transform.gameObject.name);
+            Debug.Log("hit player");
         }
+        
     }
+
+
 
 
     private void OnDrawGizmos()

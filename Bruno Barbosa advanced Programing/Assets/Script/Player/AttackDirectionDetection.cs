@@ -16,14 +16,13 @@ public class AttackDirectionDetection : MonoBehaviour
     [SerializeField] private GameObject UIElementsObject;
     [SerializeField] private Camera cam;
 
-
-
     [Header("Direction identification")]
+    [SerializeField] private float MouseMinimumMovement;
+    [SerializeField] private string currentAttackAngle;
     private Vector2 MousePosition;    
     private Vector2 directionRaw;
     private float directionAngle;
-    [SerializeField] private float MouseMinimumMovement;
-    [SerializeField] private string currentAttackAngle;
+
 
     [Header("attack destinguition")]
     [SerializeField] private float AttackTimer;
@@ -31,11 +30,12 @@ public class AttackDirectionDetection : MonoBehaviour
     private bool isCombat = false;
 
     [Header("Enemy detection")]
-    private bool enemiesNear;
     [SerializeField] private float radius;
     [SerializeField] private LayerMask EnemyLayer;
     [SerializeField] private float maxdistance;
     [SerializeField] private GameObject closestEnemy;
+    private bool enemiesNear;
+
 
     static RaycastHit[] hit = new RaycastHit[128];
 
@@ -49,6 +49,7 @@ public class AttackDirectionDetection : MonoBehaviour
 
     private void Start()
     {
+        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         UIElementsObject.SetActive(false);
@@ -71,11 +72,8 @@ public class AttackDirectionDetection : MonoBehaviour
         }
         else if(!isCombat)
         {
-            
             UIElementsObject.SetActive(false);
         }
-
-
     }
 
     private void startCombat()
@@ -115,34 +113,6 @@ public class AttackDirectionDetection : MonoBehaviour
         }
     }
 
-    /*
-    private void searchForEnemies()
-    {
-        int hits = Physics.SphereCastNonAlloc(transform.position, radius, transform.forward, hit, maxdistance, EnemyLayer);
-        if(hits > 0)
-        {
-            float ClosestDistance = Mathf.Infinity; 
-            enemiesNear = true;
-            
-            for (int i = 0; i < hits; i++)
-            {
-               float distance = Vector3.Distance(hit[i].collider.transform.position, transform.position);
-                if (ClosestDistance > distance)
-                {
-                    ClosestDistance = distance;
-                    closestEnemy = hit[i].collider.gameObject;
-                }
-            }
-        }
-        else
-        {
-            enemiesNear = false;
-        }
-    }
-
-    */
-
-
     private void checkForCloseEnemies(Vector3 center, float radius, LayerMask enemy)
     {
         //create sphere to check for coliders
@@ -151,7 +121,6 @@ public class AttackDirectionDetection : MonoBehaviour
         //run through the array
         if (hitColliders.Length > 0)
         {
-            
             float ClosestDistance = Mathf.Infinity;
             enemiesNear = true;
 
@@ -171,7 +140,7 @@ public class AttackDirectionDetection : MonoBehaviour
 
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("LeftPunch") || animator.GetAnimatorTransitionInfo(0).IsName("Idle -> LeftPunch"))
             {
-                Debug.Log("playing animation");
+                //Debug.Log("playing animation");
                 //if the animation is playing
 
                 //animationTarget.transform.position = hitColliders[0].gameObject.transform.position;
@@ -182,6 +151,7 @@ public class AttackDirectionDetection : MonoBehaviour
                 LeftArmAnimation.weight = attackWeightCurve.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
             }
+
         }
         else
         {
@@ -244,14 +214,14 @@ public class AttackDirectionDetection : MonoBehaviour
             if (AttackTimer >= HeavyAttackTimerLimit)
             {
                 proceduralAnimationManager();//for now using the same left attack for everything
-                Debug.Log("heavyAttack");
+                //Debug.Log("heavyAttack");
                 AttackTimer = 0;
                 yield return null;
             }
             else
             {
                 proceduralAnimationManager();//for now using the same left attack for everything
-                Debug.Log("simpleAttack");
+                //Debug.Log("simpleAttack");
                 AttackTimer = 0;
                 yield return null;
                
