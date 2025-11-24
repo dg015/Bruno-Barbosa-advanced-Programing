@@ -73,7 +73,7 @@ public class FootGroundPlacement : MonoBehaviour
             if (Vector3.Distance(nextPosition, hit.point) >= stepDistance && !other.IsMoving && lerp >= 1f || recalcualte)
             {
                 
-                Debug.Log(hit.collider);
+               
                 lerp = 0f;
 
                 nextPosition = hit.point;

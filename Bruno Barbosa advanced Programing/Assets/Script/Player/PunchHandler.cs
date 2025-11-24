@@ -10,6 +10,7 @@ public class PunchHandler : MonoBehaviour
     [SerializeField] private Vector3 recoilDirection;
 
     [SerializeField] private Transform enemy;
+    [SerializeField] private hurtRecoilHandler recoilHandler;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,31 +18,26 @@ public class PunchHandler : MonoBehaviour
         animator = GetComponentInParent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-            
-    }
 
     public void punch()
     {
         if(Physics.Raycast(transform.position,transform.forward,out RaycastHit hit, rayDistance, playerMask))
         {
             enemy = hit.transform;
-            //get the direction of the punch
-          
 
+          
+            //why subtract both directions?
+            //since when you're punched the direction of where the limb recoils to is based on where the punch was dealt 
+            // and the where it landed by subtracting both locations I find and in between direction
             recoilDirection = (transform.forward - hit.normal).normalized;
 
             Debug.Log(hit.transform.gameObject.name);
             Debug.Log("hit player");
+            recoilHandler = hit.transform.gameObject.GetComponent<hurtRecoilHandler>();
+            recoilHandler.applyRecoil(recoilDirection);
         }
         
     }
-
-
-
 
     private void OnDrawGizmos()
     {
@@ -49,8 +45,8 @@ public class PunchHandler : MonoBehaviour
         Gizmos.DrawRay(transform.position, transform.forward);
 
         Gizmos.color = Color.red;
-        
-        Gizmos.DrawRay(enemy.transform.position, recoilDirection);
+        if(enemy != null) 
+            Gizmos.DrawRay(enemy.transform.position, recoilDirection);
     }
 
 }

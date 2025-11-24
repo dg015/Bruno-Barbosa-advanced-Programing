@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class hurtRecoilHandler : MonoBehaviour
 {
@@ -11,16 +13,37 @@ public class hurtRecoilHandler : MonoBehaviour
 
     [SerializeField] private LayerMask playerLayer;
 
+    [SerializeField] private TwoBoneIKConstraint constraint;
+    [SerializeField] private GameObject animationTarget;
+
+    [SerializeField] private AnimationCurve recoilWeightCurve;
+    [SerializeField] private float recoilDuration;
+
+
+    [SerializeField] private float maxRecoilTimer = 1;
+
+    [SerializeField] private float currentTimer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    public void applyRecoil(Vector3 recoilDirection)
     {
-        
+        if(currentTimer < maxRecoilTimer)
+        {
+            currentTimer--;
+        }
+        if(currentTimer == 0)
+        {
+            currentTimer = maxRecoilTimer;
+        }
+            constraint.weight = recoilWeightCurve.Evaluate(currentTimer);
+        animationTarget.transform.position = transform.position + (recoilDirection * force);
     }
 
     //layermask.valuye converts it to nan interget value
