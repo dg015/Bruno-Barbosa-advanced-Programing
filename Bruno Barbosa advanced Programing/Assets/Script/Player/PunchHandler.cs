@@ -31,8 +31,8 @@ public class PunchHandler : MonoBehaviour
             // and the where it landed by subtracting both locations I find and in between direction
             recoilDirection = (transform.forward - hit.normal).normalized;
 
-            Debug.Log(hit.transform.gameObject.name);
-            Debug.Log("hit player");
+            Debug.Log(hit.transform.gameObject.name.ToString());
+            //Debug.Log("hit player");
             recoilHandler = hit.transform.gameObject.GetComponent<hurtRecoilHandler>();
             recoilHandler.applyRecoil(recoilDirection);
         }

@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void crouching( )
     {
-        Debug.Log("dodging");
+        //Debug.Log("dodging");
 
         dodgeDurationTimer += Time.deltaTime;
         float t = Mathf.Clamp01(dodgeDurationTimer/dodgeDuration);

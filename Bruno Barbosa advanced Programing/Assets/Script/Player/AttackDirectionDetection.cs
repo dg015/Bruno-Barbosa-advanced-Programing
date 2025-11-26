@@ -30,14 +30,13 @@ public class AttackDirectionDetection : MonoBehaviour
     private bool isCombat = false;
 
     [Header("Enemy detection")]
-    [SerializeField] private float radius;
+    //[SerializeField] private float radius;
     [SerializeField] private LayerMask EnemyLayer;
     [SerializeField] private float maxdistance;
     [SerializeField] private GameObject closestEnemy;
+    [SerializeField] private Collider[] hitColliders;
     private bool enemiesNear;
 
-
-    static RaycastHit[] hit = new RaycastHit[128];
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -46,6 +45,11 @@ public class AttackDirectionDetection : MonoBehaviour
     [SerializeField] private float sphereCastRadius;
     [SerializeField] private GameObject animationTarget;
     [SerializeField] private Transform animationTargetRestingPosition;
+
+    private void Awake()
+    {
+        hitColliders = new Collider[10];
+    }
 
     private void Start()
     {
@@ -70,7 +74,7 @@ public class AttackDirectionDetection : MonoBehaviour
             GetMouseLocation();
 
         }
-        else if(!isCombat)
+        else if(!isCombat || !enemiesNear)
         {
             UIElementsObject.SetActive(false);
         }
@@ -116,15 +120,16 @@ public class AttackDirectionDetection : MonoBehaviour
     private void checkForCloseEnemies(Vector3 center, float radius, LayerMask enemy)
     {
         //create sphere to check for coliders
-        Collider[] hitColliders = Physics.OverlapSphere(center, radius, enemy);
+        //Collider[] hitColliders =
+        int numColliders = Physics.OverlapSphereNonAlloc(center, radius, hitColliders, enemy);
 
         //run through the array
-        if (hitColliders.Length > 0)
+        if (numColliders > 0)
         {
             float ClosestDistance = Mathf.Infinity;
             enemiesNear = true;
 
-            for (int i = 0; i < hitColliders.Length; i++)
+            for (int i = 0; i < numColliders; i++)
             {
 
                 float distance = Vector3.Distance(hitColliders[i].transform.position, transform.position);
@@ -236,25 +241,10 @@ public class AttackDirectionDetection : MonoBehaviour
     {
         // Draw the starting sphere (at player position)
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, sphereCastRadius);
 
-        // Draw the ending sphere at the max distance along forward
-        Vector3 endPosition = transform.position + transform.forward * maxdistance;
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(endPosition, radius);
 
-        // Draw a line connecting the start and end spheres to visualize sweep
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(transform.position, endPosition);
 
-        
-        RaycastHit hit;
-        if (Physics.SphereCast(transform.position, radius, transform.forward, out hit, maxdistance, EnemyLayer))
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, hit.point);
-            Gizmos.DrawWireSphere(hit.point, radius * 0.5f); // visualize hit point
-        }
     }
 
 
