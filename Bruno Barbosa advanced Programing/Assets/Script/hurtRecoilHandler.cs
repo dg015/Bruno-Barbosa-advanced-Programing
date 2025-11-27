@@ -34,7 +34,8 @@ public class hurtRecoilHandler : MonoBehaviour
     {
         rb = GetComponentInParent<Rigidbody>();
 
-        originalPosition = transform.position;
+
+        originalPosition = animationTarget.transform.position;
         firstRun = true;
     }
 
@@ -63,6 +64,9 @@ public class hurtRecoilHandler : MonoBehaviour
             currentTimer = 0;
             punched = false;
             firstRun = true;
+
+            //just to make sure it returns to the correct locaiton
+            animationTarget.transform.position = originalPosition;
             return;
         }
         Debug.Log("hurtin");
@@ -71,18 +75,26 @@ public class hurtRecoilHandler : MonoBehaviour
         //I get the position where it should be
         //Then I lerp!
 
+        //clamp so it doesnt go past 1
         float t= Mathf.Clamp01(currentTimer/maxRecoilTimer);
 
-        animationTarget.transform.position = Vector3.Lerp(originalPosition, recoilLocation, currentTimer);
-
-        /*
-        if (Vector3.Distance(transform.position, recoilLocation)<0.2f)
+        if (t <0.5)
+        {
+            animationTarget.transform.position = Vector3.Lerp(originalPosition, recoilLocation, t);
+        }
+        
+        if (t >= 0.5)
         {
             Debug.Log("going back");
-            Vector3 position = new Vector3(originalPosition.x, transform.position.y,originalPosition.z);
-            animationTarget.transform.position = Vector3.Lerp(transform.position, position, t);
+            animationTarget.transform.position = Vector3.Lerp(recoilLocation, originalPosition, t);
         }
-        */
+        
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(originalPosition, 1);
     }
 
     //layermask.valuye converts it to nan interget value
