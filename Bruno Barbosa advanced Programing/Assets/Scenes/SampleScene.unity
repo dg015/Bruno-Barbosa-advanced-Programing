@@ -131,20 +131,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceeae66e3a4fa0941bac1d053501d1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  force: 0
+  rb: {fileID: 78556261}
+  force: 0.0001
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
   constraint: {fileID: 314730053}
-  animationTarget: {fileID: 0}
-  maxRecoilTimer: 0
-  currentTimer: 0
+  animationTarget: {fileID: 1095597516}
+  maxRecoilTimer: 0.3
   recoilDirection: {x: 0, y: 0, z: 0}
   punched: 0
   originalPosition: {x: 0, y: 0, z: 0}
   recoilLocation: {x: 0, y: 0, z: 0}
-  firstRun: 0
 --- !u!136 &37127569
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -590,6 +588,64 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 1
     m_MaintainTargetRotationOffset: 1
+--- !u!1 &334775617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 334775618}
+  - component: {fileID: 334775619}
+  m_Layer: 9
+  m_Name: RightArm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &334775618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334775617}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 867130200}
+  - {fileID: 402679584}
+  m_Father: {fileID: 572175614}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &334775619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334775617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 1
+  m_Data:
+    m_Root: {fileID: 620452061}
+    m_Mid: {fileID: 620452062}
+    m_Tip: {fileID: 620452063}
+    m_Target: {fileID: 867130200}
+    m_Hint: {fileID: 402679584}
+    m_TargetPositionWeight: 1
+    m_TargetRotationWeight: 1
+    m_HintWeight: 1
+    m_MaintainTargetPositionOffset: 0
+    m_MaintainTargetRotationOffset: 0
 --- !u!114 &347601110 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7007349307302233925, guid: 54822ce8d12b020498a3197f43ae7c7d, type: 3}
@@ -711,6 +767,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8558930778639680723, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
   m_PrefabInstance: {fileID: 987446455}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &402679583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 402679584}
+  m_Layer: 0
+  m_Name: RightArm_hint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &402679584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402679583}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.010600635, z: -0, w: -0.99994385}
+  m_LocalPosition: {x: 0.5251963, y: -0.117230415, z: 0.2679411}
+  m_LocalScale: {x: 0.10000002, y: 0.1, z: 0.10000002}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 334775618}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &428127563
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,7 +948,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43242959}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceeae66e3a4fa0941bac1d053501d1aa, type: 3}
   m_Name: 
@@ -874,12 +961,10 @@ MonoBehaviour:
   constraint: {fileID: 0}
   animationTarget: {fileID: 0}
   maxRecoilTimer: 0
-  currentTimer: 0
   recoilDirection: {x: 0, y: 0, z: 0}
   punched: 0
   originalPosition: {x: 0, y: 0, z: 0}
   recoilLocation: {x: 0, y: 0, z: 0}
-  firstRun: 0
 --- !u!4 &456840811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6279089304544197205, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -1114,6 +1199,7 @@ Transform:
   - {fileID: 1877444458}
   - {fileID: 381045933}
   - {fileID: 1207288340}
+  - {fileID: 334775618}
   m_Father: {fileID: 620452018}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &572175615
@@ -2266,6 +2352,22 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
+  - m_Transform: {fileID: 867130200}
+    m_Style:
+      shape: {fileID: 4300000, guid: 687b70eb9c49243639f9379f6965034f, type: 2}
+      color: {r: 1, g: 0, b: 0, a: 0.5}
+      size: 0.1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    m_Visible: 1
+  - m_Transform: {fileID: 402679584}
+    m_Style:
+      shape: {fileID: 4300000, guid: e050c2b16fe384bd994474655a4b4968, type: 2}
+      color: {r: 1, g: 0, b: 0, a: 0.5}
+      size: 0.1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    m_Visible: 1
 --- !u!114 &580299087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2278,7 +2380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceeae66e3a4fa0941bac1d053501d1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 78556261}
   force: 10
   playerLayer:
     serializedVersion: 2
@@ -2286,12 +2388,10 @@ MonoBehaviour:
   constraint: {fileID: 1207288341}
   animationTarget: {fileID: 1922316168}
   maxRecoilTimer: 1
-  currentTimer: 0
   recoilDirection: {x: 0, y: 0, z: 0}
   punched: 0
   originalPosition: {x: 0, y: 0, z: 0}
   recoilLocation: {x: 0, y: 0, z: 0}
-  firstRun: 1
 --- !u!135 &580299088
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4605,6 +4705,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4948750925031251327, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
   m_PrefabInstance: {fileID: 987446455}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &867130199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 867130200}
+  m_Layer: 0
+  m_Name: RightArm_target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &867130200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867130199}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.4406461, y: 0.87428796, z: 0.1426824, w: 0.14523588}
+  m_LocalPosition: {x: 0.16303472, y: 0.47821832, z: 0.38429412}
+  m_LocalScale: {x: 0.10000002, y: 0.1, z: 0.10000002}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 334775618}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &869946228
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4883,6 +5014,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 128
+  grounded: 0
   dodging: 0
   dodgeCurve:
     serializedVersion: 2
@@ -6513,7 +6645,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126412758}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceeae66e3a4fa0941bac1d053501d1aa, type: 3}
   m_Name: 
@@ -6526,12 +6658,10 @@ MonoBehaviour:
   constraint: {fileID: 0}
   animationTarget: {fileID: 0}
   maxRecoilTimer: 0
-  currentTimer: 0
   recoilDirection: {x: 0, y: 0, z: 0}
   punched: 0
   originalPosition: {x: 0, y: 0, z: 0}
   recoilLocation: {x: 0, y: 0, z: 0}
-  firstRun: 0
 --- !u!114 &1127620506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6544,20 +6674,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceeae66e3a4fa0941bac1d053501d1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  force: 0
+  rb: {fileID: 78556261}
+  force: 0.0001
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  constraint: {fileID: 0}
-  animationTarget: {fileID: 0}
-  maxRecoilTimer: 0
-  currentTimer: 0
+  constraint: {fileID: 334775619}
+  animationTarget: {fileID: 867130199}
+  maxRecoilTimer: 0.3
   recoilDirection: {x: 0, y: 0, z: 0}
   punched: 0
   originalPosition: {x: 0, y: 0, z: 0}
   recoilLocation: {x: 0, y: 0, z: 0}
-  firstRun: 0
 --- !u!136 &1127620507
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6993,7 +7121,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1315977070}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceeae66e3a4fa0941bac1d053501d1aa, type: 3}
   m_Name: 
@@ -7006,12 +7134,10 @@ MonoBehaviour:
   constraint: {fileID: 0}
   animationTarget: {fileID: 0}
   maxRecoilTimer: 0
-  currentTimer: 0
   recoilDirection: {x: 0, y: 0, z: 0}
   punched: 0
   originalPosition: {x: 0, y: 0, z: 0}
   recoilLocation: {x: 0, y: 0, z: 0}
-  firstRun: 0
 --- !u!136 &1319385402
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7068,7 +7194,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478393433}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceeae66e3a4fa0941bac1d053501d1aa, type: 3}
   m_Name: 
@@ -7081,12 +7207,10 @@ MonoBehaviour:
   constraint: {fileID: 0}
   animationTarget: {fileID: 0}
   maxRecoilTimer: 0
-  currentTimer: 0
   recoilDirection: {x: 0, y: 0, z: 0}
   punched: 0
   originalPosition: {x: 0, y: 0, z: 0}
   recoilLocation: {x: 0, y: 0, z: 0}
-  firstRun: 1
 --- !u!1 &1348346181 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6045437706989503703, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -7928,7 +8052,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138238484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceeae66e3a4fa0941bac1d053501d1aa, type: 3}
   m_Name: 
@@ -7941,12 +8065,10 @@ MonoBehaviour:
   constraint: {fileID: 2073747541}
   animationTarget: {fileID: 0}
   maxRecoilTimer: 0
-  currentTimer: 0
   recoilDirection: {x: 0, y: 0, z: 0}
   punched: 0
   originalPosition: {x: 0, y: 0, z: 0}
   recoilLocation: {x: 0, y: 0, z: 0}
-  firstRun: 0
 --- !u!4 &1711108318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5577861508944879067, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -8061,25 +8183,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620452052}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceeae66e3a4fa0941bac1d053501d1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  force: 0
+  rb: {fileID: 78556261}
+  force: 0.0001
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
   constraint: {fileID: 314730053}
-  animationTarget: {fileID: 0}
-  maxRecoilTimer: 1
-  currentTimer: 0
+  animationTarget: {fileID: 1095597516}
+  maxRecoilTimer: 0.3
   recoilDirection: {x: 0, y: 0, z: 0}
   punched: 0
   originalPosition: {x: 0, y: 0, z: 0}
   recoilLocation: {x: 0, y: 0, z: 0}
-  firstRun: 0
 --- !u!136 &1796794420
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9542,20 +9662,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceeae66e3a4fa0941bac1d053501d1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  force: 0
+  rb: {fileID: 78556261}
+  force: 0.0001
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  constraint: {fileID: 0}
-  animationTarget: {fileID: 0}
-  maxRecoilTimer: 0
-  currentTimer: 0
+  constraint: {fileID: 334775619}
+  animationTarget: {fileID: 867130199}
+  maxRecoilTimer: 0.3
   recoilDirection: {x: 0, y: 0, z: 0}
   punched: 0
   originalPosition: {x: 0, y: 0, z: 0}
   recoilLocation: {x: 0, y: 0, z: 0}
-  firstRun: 0
 --- !u!136 &1973033066
 CapsuleCollider:
   m_ObjectHideFlags: 0
