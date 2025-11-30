@@ -138,15 +138,13 @@ MonoBehaviour:
     m_Bits: 256
   constraint: {fileID: 314730053}
   animationTarget: {fileID: 0}
-  recoilWeightCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  recoilDuration: 0
   maxRecoilTimer: 0
   currentTimer: 0
+  recoilDirection: {x: 0, y: 0, z: 0}
+  punched: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  recoilLocation: {x: 0, y: 0, z: 0}
+  firstRun: 0
 --- !u!136 &37127569
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -875,15 +873,13 @@ MonoBehaviour:
     m_Bits: 256
   constraint: {fileID: 0}
   animationTarget: {fileID: 0}
-  recoilWeightCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  recoilDuration: 0
   maxRecoilTimer: 0
   currentTimer: 0
+  recoilDirection: {x: 0, y: 0, z: 0}
+  punched: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  recoilLocation: {x: 0, y: 0, z: 0}
+  firstRun: 0
 --- !u!4 &456840811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6279089304544197205, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -2287,53 +2283,15 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  constraint: {fileID: 0}
-  animationTarget: {fileID: 0}
-  recoilWeightCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.0000299362
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.408
-      value: 0.247
-      inSlope: 0.9941199
-      outSlope: 0.9941199
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.50416565
-      value: 0.501231
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: -0.00008980883
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  recoilDuration: 0
-  maxRecoilTimer: 0
+  constraint: {fileID: 1207288341}
+  animationTarget: {fileID: 1922316168}
+  maxRecoilTimer: 1
   currentTimer: 0
+  recoilDirection: {x: 0, y: 0, z: 0}
+  punched: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  recoilLocation: {x: 0, y: 0, z: 0}
+  firstRun: 1
 --- !u!135 &580299088
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6567,15 +6525,13 @@ MonoBehaviour:
     m_Bits: 256
   constraint: {fileID: 0}
   animationTarget: {fileID: 0}
-  recoilWeightCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  recoilDuration: 0
   maxRecoilTimer: 0
   currentTimer: 0
+  recoilDirection: {x: 0, y: 0, z: 0}
+  punched: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  recoilLocation: {x: 0, y: 0, z: 0}
+  firstRun: 0
 --- !u!114 &1127620506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6595,15 +6551,13 @@ MonoBehaviour:
     m_Bits: 256
   constraint: {fileID: 0}
   animationTarget: {fileID: 0}
-  recoilWeightCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  recoilDuration: 0
   maxRecoilTimer: 0
   currentTimer: 0
+  recoilDirection: {x: 0, y: 0, z: 0}
+  punched: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  recoilLocation: {x: 0, y: 0, z: 0}
+  firstRun: 0
 --- !u!136 &1127620507
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7051,15 +7005,13 @@ MonoBehaviour:
     m_Bits: 256
   constraint: {fileID: 0}
   animationTarget: {fileID: 0}
-  recoilWeightCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  recoilDuration: 0
   maxRecoilTimer: 0
   currentTimer: 0
+  recoilDirection: {x: 0, y: 0, z: 0}
+  punched: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  recoilLocation: {x: 0, y: 0, z: 0}
+  firstRun: 0
 --- !u!136 &1319385402
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7128,15 +7080,13 @@ MonoBehaviour:
     m_Bits: 256
   constraint: {fileID: 0}
   animationTarget: {fileID: 0}
-  recoilWeightCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  recoilDuration: 0
   maxRecoilTimer: 0
   currentTimer: 0
+  recoilDirection: {x: 0, y: 0, z: 0}
+  punched: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  recoilLocation: {x: 0, y: 0, z: 0}
+  firstRun: 1
 --- !u!1 &1348346181 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6045437706989503703, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -7990,15 +7940,13 @@ MonoBehaviour:
     m_Bits: 256
   constraint: {fileID: 2073747541}
   animationTarget: {fileID: 0}
-  recoilWeightCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  recoilDuration: 0
   maxRecoilTimer: 0
   currentTimer: 0
+  recoilDirection: {x: 0, y: 0, z: 0}
+  punched: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  recoilLocation: {x: 0, y: 0, z: 0}
+  firstRun: 0
 --- !u!4 &1711108318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5577861508944879067, guid: 0da90dfe953257a448cda017108a8edb, type: 3}
@@ -8125,42 +8073,13 @@ MonoBehaviour:
     m_Bits: 256
   constraint: {fileID: 314730053}
   animationTarget: {fileID: 0}
-  recoilWeightCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2
-      outSlope: -2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  recoilDuration: 0
   maxRecoilTimer: 1
   currentTimer: 0
+  recoilDirection: {x: 0, y: 0, z: 0}
+  punched: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  recoilLocation: {x: 0, y: 0, z: 0}
+  firstRun: 0
 --- !u!136 &1796794420
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9630,15 +9549,13 @@ MonoBehaviour:
     m_Bits: 256
   constraint: {fileID: 0}
   animationTarget: {fileID: 0}
-  recoilWeightCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  recoilDuration: 0
   maxRecoilTimer: 0
   currentTimer: 0
+  recoilDirection: {x: 0, y: 0, z: 0}
+  punched: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  recoilLocation: {x: 0, y: 0, z: 0}
+  firstRun: 0
 --- !u!136 &1973033066
 CapsuleCollider:
   m_ObjectHideFlags: 0

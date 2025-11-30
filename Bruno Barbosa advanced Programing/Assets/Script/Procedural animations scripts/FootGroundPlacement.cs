@@ -94,7 +94,7 @@ public class FootGroundPlacement : MonoBehaviour
         }     
     }
 
-    
+
     /// <summary>
     /// get transform and set the angle
     /// Check if the player has moved

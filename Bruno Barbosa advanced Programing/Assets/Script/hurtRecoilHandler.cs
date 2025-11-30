@@ -18,24 +18,24 @@ public class hurtRecoilHandler : MonoBehaviour
 
     [SerializeField] private float maxRecoilTimer = 1;
 
-    [SerializeField] private float currentTimer;
+    private float currentTimer;
 
     [SerializeField] public Vector3 recoilDirection;
 
-    [SerializeField] public bool punched;
+    public bool punched;
 
     [SerializeField] private Vector3 originalPosition;
 
     [SerializeField] private Vector3 recoilLocation;
 
-    [SerializeField] private bool firstRun;
+    private bool firstRun;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
 
 
-        originalPosition = animationTarget.transform.position;
+        originalPosition = animationTarget.transform.localPosition;
         firstRun = true;
     }
 
@@ -51,7 +51,7 @@ public class hurtRecoilHandler : MonoBehaviour
     {
         if(firstRun)
         {
-            recoilLocation = transform.position + (recoilDirection * force);
+            recoilLocation = transform.localPosition + (recoilDirection * force);
             firstRun = false;
         }
 
@@ -66,7 +66,7 @@ public class hurtRecoilHandler : MonoBehaviour
             firstRun = true;
 
             //just to make sure it returns to the correct locaiton
-            animationTarget.transform.position = originalPosition;
+            animationTarget.transform.localPosition = originalPosition;
             return;
         }
         Debug.Log("hurtin");
@@ -80,13 +80,13 @@ public class hurtRecoilHandler : MonoBehaviour
 
         if (t <0.5)
         {
-            animationTarget.transform.position = Vector3.Lerp(originalPosition, recoilLocation, t);
+            animationTarget.transform.localPosition = Vector3.Lerp(originalPosition, recoilLocation, t);
         }
         
         if (t >= 0.5)
         {
             Debug.Log("going back");
-            animationTarget.transform.position = Vector3.Lerp(recoilLocation, originalPosition, t);
+            animationTarget.transform.localPosition = Vector3.Lerp(recoilLocation, originalPosition, t);
         }
         
     }

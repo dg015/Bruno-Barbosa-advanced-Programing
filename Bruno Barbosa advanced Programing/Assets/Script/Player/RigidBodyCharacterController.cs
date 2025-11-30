@@ -33,7 +33,7 @@ public class RigidBodyCharacterController : MonoBehaviour
 
     [Header("Grounded")]
     [SerializeField] private LayerMask ground;
-    bool grounded;
+    [SerializeField] bool grounded;
 
     [Header("Dodge")]
     Vector3 MoveDirection;
@@ -110,7 +110,7 @@ public class RigidBodyCharacterController : MonoBehaviour
         
         getCameraDireciton();
         getInput();
-        isGroundedCheck(grounded, 15f);
+        isGroundedCheck(grounded, 1f);
         stopGravity(grounded);
 
         MultipleTapInput(KeyCode.D, 1f, 2);
@@ -159,6 +159,11 @@ public class RigidBodyCharacterController : MonoBehaviour
         {
             grounded = false;
         }
+    }
+
+    private void applyGravity()
+    {
+
     }
 
 
